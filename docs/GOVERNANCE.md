@@ -18,7 +18,8 @@ Para garantir rastreabilidade e permitir múltiplas execuções no mesmo períod
 
 ## 3. Controle de Processamento (Layer RAW)
 
-A camada RAW deve permanecer **imutável** e **bruta**. 
+A camada RAW deve permanecer **imutável** e **bruta**.
+
 - Não é permitido mover ou renomear arquivos originais.
 - O controle de redundância é feito via arquivo metadata oculto (`.processed`) que registra quais arquivos já foram processados.
 

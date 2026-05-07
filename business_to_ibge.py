@@ -1,5 +1,6 @@
 import gzip
 import json
+import math
 import os
 import time
 import unicodedata
@@ -7,6 +8,8 @@ import urllib.request
 from datetime import datetime
 
 from dotenv import load_dotenv
+from etl_utils import append_processed_file, ensure_directory, iso_now, load_processed_files, read_json_file, write_json_file
+from location_cache import city_state_key
 
 load_dotenv()
 
@@ -42,29 +45,20 @@ STATE_NAME_TO_ACRONYM = {
 }
 
 
-def ensure_directory(path):
-    os.makedirs(path, exist_ok=True)
-
-
-def load_processed_files(processed_log):
-    if not os.path.exists(processed_log):
-        return set()
-
-    with open(processed_log, "r", encoding="utf-8") as f:
-        return {line.strip() for line in f if line.strip()}
-
-
-def append_processed_file(processed_log, file_name):
-    with open(processed_log, "a", encoding="utf-8") as f:
-        f.write(f"{file_name}\n")
-
-
 def safe_text(value, default=UNKNOWN_TEXT):
     if value is None:
         return default
 
     text = str(value).strip()
     return text if text else default
+
+
+def has_real_value(value):
+    if value is None:
+        return False
+    if isinstance(value, float):
+        return not math.isnan(value)
+    return True
 
 
 def normalize_text(value):
@@ -151,32 +145,94 @@ def fetch_ibge_city(city_name, state_name, state_cache):
     return None
 
 
+def build_local_ibge_cache(ibge_path):
+    local_cache = {}
+
+    if not os.path.exists(ibge_path):
+        return local_cache
+
+    for root, _, files in os.walk(ibge_path):
+        for file_name in files:
+            if not file_name.startswith("solar_data_ibge_") or not file_name.endswith(".json"):
+                continue
+
+            records = read_json_file(os.path.join(root, file_name), default=[])
+            if not isinstance(records, list):
+                continue
+
+            for record in records:
+                if record.get("ibge_match_status") != "matched":
+                    continue
+                if not has_real_value(record.get("ibge_city_code")):
+                    continue
+
+                key = city_state_key(record.get("city"), record.get("state"))
+                if key == "|":
+                    continue
+
+                local_cache[key] = {
+                    "ibge_city_code": record.get("ibge_city_code"),
+                    "ibge_city_name": record.get("ibge_city_name"),
+                    "ibge_state_acronym": record.get("ibge_state_acronym"),
+                    "ibge_state_name": record.get("ibge_state_name"),
+                }
+
+    return local_cache
+
+
+def is_aggregated_refined_file(root, file_name):
+    if not file_name.startswith("solar_data_refined_") or not file_name.endswith(".json"):
+        return False
+
+    if "_meta_" in file_name or "_manifest_" in file_name or "_rejected_" in file_name:
+        return False
+
+    file_path = os.path.join(root, file_name)
+    records = read_json_file(file_path, default=[])
+    if not isinstance(records, list) or not records:
+        return False
+
+    first_record = records[0]
+    required_keys = {
+        "state",
+        "city",
+        "points_count",
+        "avg_lat",
+        "avg_lon",
+        "annual_avg",
+        "summer_avg",
+        "autumn_avg",
+        "winter_avg",
+        "spring_avg",
+    }
+    return isinstance(first_record, dict) and required_keys.issubset(first_record.keys())
+
+
 def process_business_to_ibge():
-    business_path = os.getenv("BUSINESS_DATA_PATH", "data/business")
+    refined_path = os.getenv("REFINED_DATA_PATH", "data/refined")
     ibge_path = os.getenv("IBGE_DATA_PATH", "data/ibge")
 
     ensure_directory(ibge_path)
+    local_ibge_cache = build_local_ibge_cache(ibge_path)
 
-    for root, _, files in os.walk(business_path):
+    for root, _, files in os.walk(refined_path):
         processed_log = os.path.join(root, ".processed_ibge")
         processed_files = load_processed_files(processed_log)
 
-        business_files = [
+        refined_files = [
             f for f in files
-            if f.startswith("solar_data_business_") and f.endswith(".json") and f not in processed_files
+            if is_aggregated_refined_file(root, f) and f not in processed_files
         ]
 
-        if not business_files:
-            print(f"[{datetime.now().strftime('%H:%M:%S')}] Nenhum business pendente em: {root}")
+        if not refined_files:
             continue
 
-        for file_name in business_files:
+        for file_name in refined_files:
             file_path = os.path.join(root, file_name)
-            print(f"[{datetime.now().strftime('%H:%M:%S')}] Enriquecendo com IBGE: {file_name}")
+            print(f"[{datetime.now().strftime('%H:%M:%S')}] Enriquecendo refined com IBGE: {file_name}")
 
             try:
-                with open(file_path, "r", encoding="utf-8") as f:
-                    records = json.load(f)
+                records = read_json_file(file_path, default=[])
 
                 if not records:
                     print(f"[{datetime.now().strftime('%H:%M:%S')}] Arquivo vazio: {file_name}")
@@ -192,8 +248,18 @@ def process_business_to_ibge():
                     city = safe_text(record.get("city"))
                     state = safe_text(record.get("state"))
                     cache_key = (normalize_text(city), normalize_text(state))
+                    local_key = city_state_key(city, state)
 
-                    if cache_key not in city_cache:
+                    if has_real_value(record.get("ibge_city_code")):
+                        city_cache[cache_key] = {
+                            "ibge_city_code": record.get("ibge_city_code"),
+                            "ibge_city_name": record.get("ibge_city_name"),
+                            "ibge_state_acronym": record.get("ibge_state_acronym"),
+                            "ibge_state_name": record.get("ibge_state_name"),
+                        }
+                    elif local_key in local_ibge_cache:
+                        city_cache[cache_key] = local_ibge_cache[local_key]
+                    elif cache_key not in city_cache:
                         city_cache[cache_key] = fetch_ibge_city(city, state, state_cache)
 
                     ibge_data = city_cache[cache_key]
@@ -205,11 +271,9 @@ def process_business_to_ibge():
                         "ibge_state_name": UNKNOWN_TEXT,
                         "ibge_state_acronym": UNKNOWN_TEXT,
                         "ibge_match_status": "not_found",
-                        "processed_at": datetime.now().isoformat(),
-                        "source_file": file_name,
                     }
 
-                    if ibge_data:
+                    if ibge_data and has_real_value(ibge_data.get("ibge_city_code")):
                         enriched.update(ibge_data)
                         enriched["ibge_match_status"] = "matched"
                         matched_count += 1
@@ -222,8 +286,15 @@ def process_business_to_ibge():
                 ensure_directory(target_dir)
 
                 target_file = os.path.join(target_dir, f"solar_data_ibge_{timestamp}.json")
-                with open(target_file, "w", encoding="utf-8") as f:
-                    json.dump(enriched_records, f, indent=4, ensure_ascii=False)
+                meta_file = os.path.join(target_dir, f"solar_data_ibge_meta_{timestamp}.json")
+                write_json_file(target_file, enriched_records)
+                write_json_file(meta_file, {
+                    "source_file": file_name,
+                    "processed_at": iso_now(),
+                    "records_enriched": len(enriched_records),
+                    "matched_count": matched_count,
+                    "schema_version": "ibge_v2",
+                })
 
                 append_processed_file(processed_log, file_name)
 

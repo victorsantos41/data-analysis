@@ -30,6 +30,7 @@ A integração com dados reais de geração de energia (sensores de inversores s
 ## Próximos Passos de Integração Tecnológica
 
 Para viabilizar essas análises, recomenda-se:
+
 1.  **Data Lake Centralizado**: Mover os arquivos da camada REFINED para um Warehouse (como BigQuery ou AWS Athena).
 2.  **Ferramenta de BI**: Conectar tabelas de geolocalização para visualização em mapas de calor (Heatmaps).
 3.  **API de Enriquecimento**: Consumir APIs de dados demográficos ou de trânsito de veículos.

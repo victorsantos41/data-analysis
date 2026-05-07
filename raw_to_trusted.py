@@ -1,9 +1,8 @@
 import pandas as pd
-import json
 import os
-import time
 from datetime import datetime
 from dotenv import load_dotenv
+from etl_utils import ensure_directory, load_processed_files, append_processed_file, write_json_file, iso_now
 
 load_dotenv()
 
@@ -12,16 +11,12 @@ def process_raw_to_trusted():
     trusted_path = os.getenv("TRUSTED_DATA_PATH", "data/trusted")
     
     # Garantir que o diretório trusted existe
-    if not os.path.exists(trusted_path):
-        os.makedirs(trusted_path)
+    ensure_directory(trusted_path)
 
     # Listar arquivos CSV pendentes
     for root, dirs, files in os.walk(raw_path):
         processed_log = os.path.join(root, ".processed")
-        processed_files = set()
-        if os.path.exists(processed_log):
-            with open(processed_log, 'r') as f:
-                processed_files = {line.strip() for line in f}
+        processed_files = load_processed_files(processed_log)
 
         csv_files = [f for f in files if f.endswith(".csv") and f not in processed_files]
         
@@ -59,7 +54,7 @@ def process_raw_to_trusted():
                         "lon": float(row['lon']),
                         "lat": float(row['lat']),
                         "annual": float(row['annual']),
-                        "monthly_data": {m: float(row[m]) for m in ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC']}
+                        "monthly_data": {m: float(row[m]) for m in ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC']},
                     }
                     records.append(record)
                 
@@ -68,16 +63,20 @@ def process_raw_to_trusted():
                 date_folder = datetime.now().strftime("%m-%Y")
                 target_dir = os.path.join(trusted_path, date_folder)
                 
-                if not os.path.exists(target_dir):
-                    os.makedirs(target_dir)
+                ensure_directory(target_dir)
                 
                 target_file = os.path.join(target_dir, f"solar_data_trusted_{timestamp}.json")
-                with open(target_file, 'w', encoding='utf-8') as f:
-                    json.dump(records, f, indent=4, ensure_ascii=False)
+                meta_file = os.path.join(target_dir, f"solar_data_trusted_meta_{timestamp}.json")
+                write_json_file(target_file, records)
+                write_json_file(meta_file, {
+                    "source_file": file_name,
+                    "processed_at": iso_now(),
+                    "records_count": len(records),
+                    "schema_version": "trusted_v2",
+                })
                 
                 # Marcar como processado
-                with open(processed_log, 'a') as f:
-                    f.write(f"{file_name}\n")
+                append_processed_file(processed_log, file_name)
                 
                 print(f"[{datetime.now().strftime('%H:%M:%S')}] Salvo em: {target_file}")
                 
