@@ -1,0 +1,2 @@
+# solar_data_trusted_20260418_134314.json
+# solar_data_trusted_20260418_161929.json
