@@ -1,87 +1,101 @@
-import pandas as pd
+import boto3
+import csv
+import json
 import os
 from datetime import datetime
-from dotenv import load_dotenv
-from etl_utils import ensure_directory, load_processed_files, append_processed_file, write_json_file, iso_now
+from io import StringIO
 
-load_dotenv()
+s3 = boto3.client("s3")
 
-def process_raw_to_trusted():
-    raw_path = os.getenv("RAW_DATA_PATH", "data/raw")
-    trusted_path = os.getenv("TRUSTED_DATA_PATH", "data/trusted")
-    
-    # Garantir que o diretório trusted existe
-    ensure_directory(trusted_path)
+RAW_BUCKET = os.getenv("RAW_BUCKET", "solarway-raw")
+TRUSTED_BUCKET = os.getenv("TRUSTED_BUCKET", "solarway-trusted")
 
-    # Listar arquivos CSV pendentes
-    for root, dirs, files in os.walk(raw_path):
-        processed_log = os.path.join(root, ".processed")
-        processed_files = load_processed_files(processed_log)
+MONTH_KEYS = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"]
 
-        csv_files = [f for f in files if f.endswith(".csv") and f not in processed_files]
-        
-        for file_name in csv_files:
-            file_path = os.path.join(root, file_name)
-            print(f"[{datetime.now().strftime('%H:%M:%S')}] Processando: {file_name}")
-            
-            try:
-                # Carregar CSV
-                df = pd.read_csv(file_path, sep=';', encoding='utf-8-sig')
-                
-                # Deduplicação por ID
-                df = df.drop_duplicates(subset=['ID'])
-                
-                # Tratamento de nulos e arredondamento (1 casa decimal)
-                numeric_cols = ['ANNUAL', 'JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC']
-                for col in numeric_cols:
-                    df[col] = df[col].fillna(0.0).round(1)
-                
-                # Padronização de nomes (Inglês)
-                df = df.rename(columns={
-                    'ID': 'id',
-                    'UF': 'state',
-                    'LON': 'lon',
-                    'LAT': 'lat',
-                    'ANNUAL': 'annual'
-                })
-                
-                # Estruturar monthly_data como dicionário
-                records = []
-                for _, row in df.iterrows():
-                    record = {
-                        "id": int(row['id']),
-                        "state": row['state'],
-                        "lon": float(row['lon']),
-                        "lat": float(row['lat']),
-                        "annual": float(row['annual']),
-                        "monthly_data": {m: float(row[m]) for m in ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC']},
-                    }
-                    records.append(record)
-                
-                # Salvar em JSON com timestamp e pasta MM-YYYY
-                timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-                date_folder = datetime.now().strftime("%m-%Y")
-                target_dir = os.path.join(trusted_path, date_folder)
-                
-                ensure_directory(target_dir)
-                
-                target_file = os.path.join(target_dir, f"solar_data_trusted_{timestamp}.json")
-                meta_file = os.path.join(target_dir, f"solar_data_trusted_meta_{timestamp}.json")
-                write_json_file(target_file, records)
-                write_json_file(meta_file, {
-                    "source_file": file_name,
-                    "processed_at": iso_now(),
-                    "records_count": len(records),
-                    "schema_version": "trusted_v2",
-                })
-                
-                # Marcar como processado
-                append_processed_file(processed_log, file_name)
-                
-                print(f"[{datetime.now().strftime('%H:%M:%S')}] Salvo em: {target_file}")
-                
-            except Exception as e:
-                print(f"Erro ao processar {file_name}: {e}")
 
-if __name__ == "__main__":
-    process_raw_to_trusted()
+def safe_float(value):
+    if value is None:
+        return 0.0
+
+    text = str(value).strip()
+    if not text:
+        return 0.0
+
+    return round(float(text.replace(",", ".")), 1)
+
+
+def build_target_key():
+    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+    date_folder = datetime.now().strftime("%m-%Y")
+    return f"{date_folder}/solar_data_trusted_{timestamp}.json"
+
+
+def process_csv_content(csv_content):
+    reader = csv.DictReader(StringIO(csv_content), delimiter=";")
+    deduplicated = {}
+
+    for row in reader:
+        if not row.get("ID"):
+            continue
+
+        row_id = int(row["ID"])
+        deduplicated[row_id] = {
+            "id": row_id,
+            "state": row["UF"],
+            "lon": float(row["LON"]),
+            "lat": float(row["LAT"]),
+            "annual": safe_float(row["ANNUAL"]),
+            "monthly_data": {month: safe_float(row.get(month)) for month in MONTH_KEYS},
+        }
+
+    return list(deduplicated.values())
+
+
+def lambda_handler(event, context):
+    processed_files = []
+
+    for record in event.get("Records", []):
+        source_bucket = record["s3"]["bucket"]["name"]
+        source_key = record["s3"]["object"]["key"]
+
+        if source_bucket != RAW_BUCKET:
+            print(f"Ignorando bucket nao esperado: {source_bucket}")
+            continue
+
+        if not source_key.lower().endswith(".csv"):
+            print(f"Ignorando arquivo nao CSV: {source_key}")
+            continue
+
+        print(f"[{datetime.now().strftime('%H:%M:%S')}] Processando: {source_key}")
+
+        response = s3.get_object(Bucket=source_bucket, Key=source_key)
+        csv_content = response["Body"].read().decode("utf-8-sig")
+
+        records = process_csv_content(csv_content)
+
+        target_key = build_target_key()
+
+        s3.put_object(
+            Bucket=TRUSTED_BUCKET,
+            Key=target_key,
+            Body=json.dumps(records, ensure_ascii=False).encode("utf-8"),
+            ContentType="application/json"
+        )
+
+        print(f"[{datetime.now().strftime('%H:%M:%S')}] Salvo em: s3://{TRUSTED_BUCKET}/{target_key}")
+
+        processed_files.append({
+            "source_bucket": source_bucket,
+            "source_key": source_key,
+            "target_bucket": TRUSTED_BUCKET,
+            "target_key": target_key,
+            "records_count": len(records)
+        })
+
+    return {
+        "statusCode": 200,
+        "body": json.dumps({
+            "message": "raw_to_trusted concluido",
+            "processed_files": processed_files
+        }, ensure_ascii=False)
+    }
