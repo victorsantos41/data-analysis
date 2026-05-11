@@ -6,3 +6,6 @@ Corrigi `trusted_to_refined.py` para ignorar arquivos `solar_data_trusted_meta_*
 
 ## 2026-05-06 20:45:00 - Simplificacao da camada refined para Lambda
 Reduzi a saida da camada `refined` para apenas dois arquivos por execucao: o JSON principal agregado e o JSON de rejeitados. Removi a geracao de `meta` e `manifest` dessa camada, mantive as estatisticas apenas em log, e adaptei `business_to_ibge.py` para reconhecer o `refined` principal pelo schema do payload, sem depender mais de sidecars.
+
+## 2026-05-10 20:30:00 - Restauracao do raw_to_trusted local
+Restaurei `raw_to_trusted.py` para o comportamento local anterior a tentativa de adaptacao para Lambda. A etapa voltou a ler de `data/raw`, gravar em `data/trusted` e deixar de gerar o arquivo `solar_data_trusted_meta_*.json`.
