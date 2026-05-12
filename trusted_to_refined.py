@@ -1,46 +1,53 @@
 import boto3
 import json
-import math
 import os
 from datetime import datetime
 from urllib.parse import unquote_plus
 
 s3 = boto3.client("s3")
 
-TRUSTED_BUCKET = os.getenv("TRUSTED_BUCKET","solarway-trusted")
-REFINED_BUCKET = os.getenv("REFINED_BUCKET","solarway-refined")
-SUPPORT_BUCKET = os.getenv("SUPPORT_BUCKET","solarway-support")
+TRUSTED_BUCKET = os.getenv("TRUSTED_BUCKET", "solarway-trusted")
+REFINED_BUCKET = os.getenv("REFINED_BUCKET", "solarway-refined")
+SUPPORT_BUCKET = os.getenv("SUPPORT_BUCKET", "solarway-support")
 
 SUPPORT_IBGE_GEOJSON_KEY = os.getenv(
     "SUPPORT_IBGE_GEOJSON_KEY",
-    "ibge/ibge_sp_municipios_geo_fixed.geojson"
+    "ibge/ibge_sp_municipios_geo_fixed.geojson",
 )
-
 SUPPORT_IBGE_MUNICIPALITIES_KEY = os.getenv(
     "SUPPORT_IBGE_MUNICIPALITIES_KEY",
-    "ibge/ibge_municipios_sp_test.json"
+    "ibge/ibge_municipios_sp_test.json",
 )
 
 MONTH_KEYS = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"]
-UNKNOWN_TEXT = "desconhecido"
+GROUP_KEYS = ["state", "city", "ibge_city_code"]
 
-def download_s3_file(bucket,key,local_path):
+
+def download_s3_file(bucket, key, local_path):
     response = s3.get_object(Bucket=bucket, Key=key)
     content = response["Body"].read()
 
     with open(local_path, "wb") as f:
         f.write(content)
 
-def load_trusted_records_from_s3(bucket,s3):
+
+def load_trusted_records_from_s3(bucket, key):
     response = s3.get_object(Bucket=bucket, Key=key)
     content = response["Body"].read().decode("utf-8")
-    return json.loads(content)
+    payload = json.loads(content)
+
+    if not isinstance(payload, list):
+        raise ValueError("Arquivo trusted invalido: esperado JSON array.")
+
+    return payload
+
 
 def build_refined_key():
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
     date_folder = datetime.now().strftime("%m-%Y")
     return f"{date_folder}/solar_data_refined_{timestamp}.json"
-    
+
+
 def calculate_seasons(monthly_data):
     return {
         "summer_avg": round((monthly_data.get("JAN", 0) + monthly_data.get("FEB", 0) + monthly_data.get("DEC", 0)) / 3, 1),
@@ -49,73 +56,115 @@ def calculate_seasons(monthly_data):
         "spring_avg": round((monthly_data.get("SEP", 0) + monthly_data.get("OCT", 0) + monthly_data.get("NOV", 0)) / 3, 1),
     }
 
+
 def aggregate_records(valid_records):
-    df = pd.DataFrame(valid_records)
-    required_columns = GROUP_KEYS + ["id", "lat", "lon", "annual", *MONTH_COLUMNS, "summer_avg", "autumn_avg", "winter_avg", "spring_avg"]
-    missing_columns = [col for col in required_columns if col not in df.columns]
-    if missing_columns:
-        raise ValueError(f"Colunas ausentes para agregacao refined: {missing_columns}")
+    if not valid_records:
+        return []
 
-    aggregated = (
-        df.groupby(GROUP_KEYS, dropna=False)
-        .agg(
-            points_count=("id", "count"),
-            avg_lat=("lat", "mean"),
-            avg_lon=("lon", "mean"),
-            annual_avg=("annual", "mean"),
-            jan_avg=("JAN", "mean"),
-            feb_avg=("FEB", "mean"),
-            mar_avg=("MAR", "mean"),
-            apr_avg=("APR", "mean"),
-            may_avg=("MAY", "mean"),
-            jun_avg=("JUN", "mean"),
-            jul_avg=("JUL", "mean"),
-            aug_avg=("AUG", "mean"),
-            sep_avg=("SEP", "mean"),
-            oct_avg=("OCT", "mean"),
-            nov_avg=("NOV", "mean"),
-            dec_avg=("DEC", "mean"),
-            summer_avg=("summer_avg", "mean"),
-            autumn_avg=("autumn_avg", "mean"),
-            winter_avg=("winter_avg", "mean"),
-            spring_avg=("spring_avg", "mean"),
-            ibge_city_code=("ibge_city_code", "first"),
-            ibge_city_name=("ibge_city_name", "first"),
-            ibge_state_name=("ibge_state_name", "first"),
-            ibge_state_acronym=("ibge_state_acronym", "first"),
+    grouped = {}
+
+    for record in valid_records:
+        missing_group_field = any(record.get(field) in (None, "") for field in GROUP_KEYS)
+        if missing_group_field:
+            continue
+
+        group_key = tuple(record[field] for field in GROUP_KEYS)
+        group = grouped.setdefault(
+            group_key,
+            {
+                "state": record["state"],
+                "city": record["city"],
+                "ibge_city_code": record["ibge_city_code"],
+                "ibge_city_name": record.get("ibge_city_name"),
+                "ibge_state_name": record.get("ibge_state_name"),
+                "ibge_state_acronym": record.get("ibge_state_acronym"),
+                "points_count": 0,
+                "lat_sum": 0.0,
+                "lon_sum": 0.0,
+                "annual_sum": 0.0,
+                "month_sums": {month.lower() + "_avg": 0.0 for month in MONTH_KEYS},
+                "season_sums": {
+                    "summer_avg": 0.0,
+                    "autumn_avg": 0.0,
+                    "winter_avg": 0.0,
+                    "spring_avg": 0.0,
+                },
+            },
         )
-        .reset_index()
-    )
 
-    numeric_columns = [
-        "avg_lat", "avg_lon", "annual_avg",
-        "jan_avg", "feb_avg", "mar_avg", "apr_avg", "may_avg", "jun_avg",
-        "jul_avg", "aug_avg", "sep_avg", "oct_avg", "nov_avg", "dec_avg",
-        "summer_avg", "autumn_avg", "winter_avg", "spring_avg",
-    ]
+        group["points_count"] += 1
+        group["lat_sum"] += float(record["lat"])
+        group["lon_sum"] += float(record["lon"])
+        group["annual_sum"] += float(record["annual"])
 
-    for col in numeric_columns:
-        aggregated[col] = aggregated[col].round(1)
+        for month in MONTH_KEYS:
+            group["month_sums"][month.lower() + "_avg"] += float(record.get(month, 0.0))
 
-    optional_columns = [
-        "suburb",
-        "postcode",
-        "ibge_city_code",
-        "ibge_city_name",
-        "ibge_state_name",
-        "ibge_state_acronym",
-    ]
-    for col in optional_columns:
-        aggregated[col] = aggregated[col].astype(object).where(pd.notna(aggregated[col]), None)
+        for season_key in group["season_sums"]:
+            group["season_sums"][season_key] += float(record.get(season_key, 0.0))
 
-    return aggregated.to_dict(orient="records")
+    aggregated_records = []
+    for group in grouped.values():
+        points_count = group["points_count"]
+        aggregated_records.append(
+            {
+                "state": group["state"],
+                "city": group["city"],
+                "ibge_city_code": group["ibge_city_code"],
+                "ibge_city_name": group["ibge_city_name"],
+                "ibge_state_name": group["ibge_state_name"],
+                "ibge_state_acronym": group["ibge_state_acronym"],
+                "points_count": points_count,
+                "avg_lat": round(group["lat_sum"] / points_count, 1),
+                "avg_lon": round(group["lon_sum"] / points_count, 1),
+                "annual_avg": round(group["annual_sum"] / points_count, 1),
+                **{
+                    month_key: round(total / points_count, 1)
+                    for month_key, total in group["month_sums"].items()
+                },
+                **{
+                    season_key: round(total / points_count, 1)
+                    for season_key, total in group["season_sums"].items()
+                },
+            }
+        )
 
-def lambda_handler(event,context):
+    return aggregated_records
+
+
+def build_base_valid_records(trusted_records):
+    valid_records = []
+
+    for reading in trusted_records:
+        monthly_data = reading.get("monthly_data", {})
+        seasons = calculate_seasons(monthly_data)
+
+        valid_records.append(
+            {
+                "id": reading["id"],
+                "lat": float(reading["lat"]),
+                "lon": float(reading["lon"]),
+                "state": reading.get("state"),
+                "city": None,
+                "ibge_city_code": None,
+                "ibge_city_name": None,
+                "ibge_state_name": None,
+                "ibge_state_acronym": None,
+                "annual": round(float(reading["annual"]), 1),
+                **{month: round(float(monthly_data.get(month, 0)), 1) for month in MONTH_KEYS},
+                **seasons,
+            }
+        )
+
+    return valid_records
+
+
+def lambda_handler(event, context):
     processed_files = []
 
     for record in event.get("Records", []):
-        source_bucket = record["s3"]["bukcet"]["name"]
-        source_key = record["s3"]["object"]["key"]
+        source_bucket = record["s3"]["bucket"]["name"]
+        source_key = unquote_plus(record["s3"]["object"]["key"])
 
         if source_bucket != TRUSTED_BUCKET:
             print(f"Ignorando bucket nao esperado: {source_bucket}")
@@ -126,3 +175,50 @@ def lambda_handler(event,context):
             continue
 
         print(f"[{datetime.now().strftime('%H:%M:%S')}] Processando: {source_key}")
+
+        geojson_tmp_path = "/tmp/ibge_sp_municipios_geo_fixed.geojson"
+        municipalities_tmp_path = "/tmp/ibge_municipios_sp_test.json"
+
+        download_s3_file(SUPPORT_BUCKET, SUPPORT_IBGE_GEOJSON_KEY, geojson_tmp_path)
+        download_s3_file(SUPPORT_BUCKET, SUPPORT_IBGE_MUNICIPALITIES_KEY, municipalities_tmp_path)
+
+        trusted_records = load_trusted_records_from_s3(source_bucket, source_key)
+        valid_records = build_base_valid_records(trusted_records)
+        aggregated_records = aggregate_records(valid_records)
+
+        target_key = build_refined_key()
+        s3.put_object(
+            Bucket=REFINED_BUCKET,
+            Key=target_key,
+            Body=json.dumps(aggregated_records, ensure_ascii=False).encode("utf-8"),
+            ContentType="application/json",
+        )
+
+        print(f"[{datetime.now().strftime('%H:%M:%S')}] Registros lidos: {len(trusted_records)}")
+        print(f"[{datetime.now().strftime('%H:%M:%S')}] Registros preparados: {len(valid_records)}")
+        print(f"[{datetime.now().strftime('%H:%M:%S')}] Registros agregados: {len(aggregated_records)}")
+        print(f"[{datetime.now().strftime('%H:%M:%S')}] Salvo em: s3://{REFINED_BUCKET}/{target_key}")
+
+        processed_files.append(
+            {
+                "source_bucket": source_bucket,
+                "source_key": source_key,
+                "target_bucket": REFINED_BUCKET,
+                "target_key": target_key,
+                "records_read": len(trusted_records),
+                "records_prepared": len(valid_records),
+                "records_aggregated": len(aggregated_records),
+            }
+        )
+
+    return {
+        "statusCode": 200,
+        "body": json.dumps(
+            {
+                "message": "trusted_to_refined base lambda concluido",
+                "processed_files": processed_files,
+                "next_step": "incorporar municipality resolver",
+            },
+            ensure_ascii=False,
+        ),
+    }
