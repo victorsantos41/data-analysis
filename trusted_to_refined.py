@@ -47,7 +47,6 @@ def build_refined_key():
     date_folder = datetime.now().strftime("%m-%Y")
     return f"{date_folder}/solar_data_refined_{timestamp}.json"
 
-
 def calculate_seasons(monthly_data):
     return {
         "summer_avg": round((monthly_data.get("JAN", 0) + monthly_data.get("FEB", 0) + monthly_data.get("DEC", 0)) / 3, 1),
@@ -55,7 +54,6 @@ def calculate_seasons(monthly_data):
         "winter_avg": round((monthly_data.get("JUN", 0) + monthly_data.get("JUL", 0) + monthly_data.get("AUG", 0)) / 3, 1),
         "spring_avg": round((monthly_data.get("SEP", 0) + monthly_data.get("OCT", 0) + monthly_data.get("NOV", 0)) / 3, 1),
     }
-
 
 def aggregate_records(valid_records):
     if not valid_records:
@@ -131,25 +129,28 @@ def aggregate_records(valid_records):
 
     return aggregated_records
 
-
-def build_base_valid_records(trusted_records):
+def build_resolved_valid_records(trusted_records, resolver):
     valid_records = []
 
     for reading in trusted_records:
         monthly_data = reading.get("monthly_data", {})
         seasons = calculate_seasons(monthly_data)
 
+        location = resolver.resolve(reading["lat"], reading["lon"])
+        if not location.get("matched"):
+            continue
+
         valid_records.append(
             {
                 "id": reading["id"],
                 "lat": float(reading["lat"]),
                 "lon": float(reading["lon"]),
-                "state": reading.get("state"),
-                "city": None,
-                "ibge_city_code": None,
-                "ibge_city_name": None,
-                "ibge_state_name": None,
-                "ibge_state_acronym": None,
+                "state": location.get("state") or reading.get("state"),
+                "city": location.get("city"),
+                "ibge_city_code": location.get("ibge_city_code"),
+                "ibge_city_name": location.get("ibge_city_name"),
+                "ibge_state_name": location.get("ibge_state_name"),
+                "ibge_state_acronym": location.get("ibge_state_acronym"),
                 "annual": round(float(reading["annual"]), 1),
                 **{month: round(float(monthly_data.get(month, 0)), 1) for month in MONTH_KEYS},
                 **seasons,
@@ -157,7 +158,6 @@ def build_base_valid_records(trusted_records):
         )
 
     return valid_records
-
 
 def lambda_handler(event, context):
     processed_files = []
@@ -188,7 +188,7 @@ def lambda_handler(event, context):
             cache_path="/tmp/municipality_lookup_sp.json",
 )
         trusted_records = load_trusted_records_from_s3(source_bucket, source_key)
-        valid_records = build_base_valid_records(trusted_records)
+        valid_records = build_resolved_valid_records(trusted_records, resolver)
         aggregated_records = aggregate_records(valid_records)
 
         target_key = build_refined_key()
