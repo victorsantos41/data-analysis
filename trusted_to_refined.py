@@ -23,7 +23,6 @@ SUPPORT_IBGE_MUNICIPALITIES_KEY = os.getenv(
 MONTH_KEYS = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"]
 GROUP_KEYS = ["state", "city", "ibge_city_code"]
 
-
 def download_s3_file(bucket, key, local_path):
     response = s3.get_object(Bucket=bucket, Key=key)
     content = response["Body"].read()
@@ -40,7 +39,6 @@ def load_trusted_records_from_s3(bucket, key):
         raise ValueError("Arquivo trusted invalido: esperado JSON array.")
 
     return payload
-
 
 def build_refined_key():
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
