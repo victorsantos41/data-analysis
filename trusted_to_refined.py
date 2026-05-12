@@ -1,11 +1,22 @@
+import boto3
 import json
 import os
 import time
 import urllib.request
 from datetime import datetime
+from io import StringIO
 
 import pandas as pd
 from dotenv import load_dotenv
+
+s3 = boto3.client("s3")
+
+TRUSTED_BUCKET = os.getenv("TRUSTED_BUCKET","solarway-trusted")
+REFINED_BUCKET = os.getenv("REFINED_BUCKET","solarway-refined")
+
+MONTH_KEYS = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"]
+GROUP_KEYS = ["state", "city", "suburb", "postcode"]
+UNKNOWN_TEXT = "desconhecido"
 
 from etl_utils import (
     append_processed_file,
@@ -23,11 +34,6 @@ from location_cache import (
 )
 
 load_dotenv()
-
-MONTH_COLUMNS = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"]
-GROUP_KEYS = ["state", "city", "suburb", "postcode"]
-UNKNOWN_TEXT = "desconhecido"
-
 
 def env_flag(name, default):
     raw_value = os.getenv(name)
@@ -453,6 +459,22 @@ def process_trusted_to_refined():
             except Exception as e:
                 print(f"Erro ao refinar {file_name}: {e}")
 
+def lambda_handler(event,context):
+    processed_files = []
+
+    for record in event.get("Records", []):
+        source_bucket = record["s3"]["bukcet"]["name"]
+        source_key = record["s3"]["object"]["key"]
+
+        if source_bucket != TRUSTED_BUCKET:
+            print(f"Ignorando bucket nao esperado: {source_bucket}")
+            continue
+
+        if not source_key.lower().endswith(".json"):
+            print(f"Ignorando arquivo nao JSON: {source_key}")
+            continue
+
+        print(f"[{datetime.now().strftime('%H:%M:%S')}] Processando: {source_key}")
 
 if __name__ == "__main__":
     process_trusted_to_refined()
