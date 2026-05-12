@@ -3,6 +3,7 @@ import json
 import os
 from datetime import datetime
 from urllib.parse import unquote_plus
+from municipality_resolver import MunicipalityResolver
 
 s3 = boto3.client("s3")
 
@@ -29,7 +30,6 @@ def download_s3_file(bucket, key, local_path):
 
     with open(local_path, "wb") as f:
         f.write(content)
-
 
 def load_trusted_records_from_s3(bucket, key):
     response = s3.get_object(Bucket=bucket, Key=key)
@@ -182,6 +182,11 @@ def lambda_handler(event, context):
         download_s3_file(SUPPORT_BUCKET, SUPPORT_IBGE_GEOJSON_KEY, geojson_tmp_path)
         download_s3_file(SUPPORT_BUCKET, SUPPORT_IBGE_MUNICIPALITIES_KEY, municipalities_tmp_path)
 
+        resolver = MunicipalityResolver(
+            geojson_path=geojson_tmp_path,
+            municipalities_path=municipalities_tmp_path,
+            cache_path="/tmp/municipality_lookup_sp.json",
+)
         trusted_records = load_trusted_records_from_s3(source_bucket, source_key)
         valid_records = build_base_valid_records(trusted_records)
         aggregated_records = aggregate_records(valid_records)
