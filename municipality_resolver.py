@@ -1,9 +1,5 @@
 import json
 import math
-import os
-
-from etl_utils import read_json_file, write_json_file
-from location_cache import haversine_km
 
 
 DEFAULT_TILE_SIZE = 0.5
@@ -17,6 +13,20 @@ def normalize_text(value):
     if value is None:
         return ""
     return " ".join(str(value).strip().split())
+
+
+def haversine_km(lat1, lon1, lat2, lon2):
+    radius = 6371.0
+    dlat = math.radians(lat2 - lat1)
+    dlon = math.radians(lon2 - lon1)
+    a = (
+        math.sin(dlat / 2) ** 2
+        + math.cos(math.radians(lat1))
+        * math.cos(math.radians(lat2))
+        * math.sin(dlon / 2) ** 2
+    )
+    c = 2 * math.atan2(math.sqrt(a), math.sqrt(1 - a))
+    return radius * c
 
 
 def point_on_segment(point_x, point_y, ax, ay, bx, by, tolerance=1e-9):
@@ -122,12 +132,12 @@ def geometry_to_polygons(geometry):
 
 
 class MunicipalityResolver:
-    def __init__(self, geojson_path, municipalities_path, cache_path, tile_size=DEFAULT_TILE_SIZE):
+    def __init__(self, geojson_path, municipalities_path, cache_path=None, tile_size=DEFAULT_TILE_SIZE):
         self.geojson_path = geojson_path
         self.municipalities_path = municipalities_path
         self.cache_path = cache_path
         self.tile_size = tile_size
-        self.cache = read_json_file(cache_path, default={}) or {}
+        self.cache = {}
         self.cache_dirty = False
         self.municipalities = []
         self.tile_index = {}
@@ -140,8 +150,11 @@ class MunicipalityResolver:
         self._load()
 
     def _load(self):
-        geojson = read_json_file(self.geojson_path, default={})
-        municipality_rows = read_json_file(self.municipalities_path, default=[]) or []
+        with open(self.geojson_path, "r", encoding="utf-8") as f:
+            geojson = json.load(f)
+
+        with open(self.municipalities_path, "r", encoding="utf-8") as f:
+            municipality_rows = json.load(f) or []
 
         metadata_by_code = {}
         for row in municipality_rows:
@@ -341,10 +354,4 @@ class MunicipalityResolver:
         return resolved
 
     def save_cache(self):
-        if not self.cache_dirty:
-            return
-
-        cache_dir = os.path.dirname(self.cache_path)
-        if cache_dir:
-            os.makedirs(cache_dir, exist_ok=True)
-        write_json_file(self.cache_path, self.cache)
+        return
