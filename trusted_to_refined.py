@@ -9,26 +9,23 @@ s3 = boto3.client("s3")
 
 TRUSTED_BUCKET = os.getenv("TRUSTED_BUCKET", "solarway-trusted")
 REFINED_BUCKET = os.getenv("REFINED_BUCKET", "solarway-refined")
-SUPPORT_BUCKET = os.getenv("SUPPORT_BUCKET", "solarway-support")
-
-SUPPORT_IBGE_GEOJSON_KEY = os.getenv(
-    "SUPPORT_IBGE_GEOJSON_KEY",
-    "ibge/ibge_sp_municipios_geo_fixed.geojson",
+LAMBDA_ASSETS_DIR = os.getenv("LAMBDA_ASSETS_DIR", os.path.dirname(__file__))
+IBGE_GEOJSON_PATH = os.path.join(
+    LAMBDA_ASSETS_DIR,
+    os.getenv("IBGE_GEOJSON_FILE", "ibge_sp_municipios_geo_fixed.geojson"),
 )
-SUPPORT_IBGE_MUNICIPALITIES_KEY = os.getenv(
-    "SUPPORT_IBGE_MUNICIPALITIES_KEY",
-    "ibge/ibge_municipios_sp_test.json",
+IBGE_MUNICIPALITIES_PATH = os.path.join(
+    LAMBDA_ASSETS_DIR,
+    os.getenv("IBGE_MUNICIPALITIES_FILE", "ibge_municipios_sp_test.json"),
 )
 
 MONTH_KEYS = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"]
 GROUP_KEYS = ["state", "city", "ibge_city_code"]
-
-def download_s3_file(bucket, key, local_path):
-    response = s3.get_object(Bucket=bucket, Key=key)
-    content = response["Body"].read()
-
-    with open(local_path, "wb") as f:
-        f.write(content)
+RESOLVER = MunicipalityResolver(
+    geojson_path=IBGE_GEOJSON_PATH,
+    municipalities_path=IBGE_MUNICIPALITIES_PATH,
+    cache_path="/tmp/municipality_lookup_sp.json",
+)
 
 def load_trusted_records_from_s3(bucket, key):
     response = s3.get_object(Bucket=bucket, Key=key)
@@ -173,20 +170,8 @@ def lambda_handler(event, context):
             continue
 
         print(f"[{datetime.now().strftime('%H:%M:%S')}] Processando: {source_key}")
-
-        geojson_tmp_path = "/tmp/ibge_sp_municipios_geo_fixed.geojson"
-        municipalities_tmp_path = "/tmp/ibge_municipios_sp_test.json"
-
-        download_s3_file(SUPPORT_BUCKET, SUPPORT_IBGE_GEOJSON_KEY, geojson_tmp_path)
-        download_s3_file(SUPPORT_BUCKET, SUPPORT_IBGE_MUNICIPALITIES_KEY, municipalities_tmp_path)
-
-        resolver = MunicipalityResolver(
-            geojson_path=geojson_tmp_path,
-            municipalities_path=municipalities_tmp_path,
-            cache_path="/tmp/municipality_lookup_sp.json",
-)
         trusted_records = load_trusted_records_from_s3(source_bucket, source_key)
-        valid_records = build_resolved_valid_records(trusted_records, resolver)
+        valid_records = build_resolved_valid_records(trusted_records, RESOLVER)
         aggregated_records = aggregate_records(valid_records)
 
         target_key = build_refined_key()
@@ -220,7 +205,6 @@ def lambda_handler(event, context):
             {
                 "message": "trusted_to_refined base lambda concluido",
                 "processed_files": processed_files,
-                "next_step": "incorporar municipality resolver",
             },
             ensure_ascii=False,
         ),
