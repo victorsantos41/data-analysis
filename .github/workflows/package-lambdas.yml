@@ -33,22 +33,22 @@ jobs:
           cd package
           zip -r ../raw_to_trusted.zip .
           cd ..
-          zip -g raw_to_trusted.zip raw_to_trusted.py
+          zip -g raw_to_trusted.zip lambdas/raw_to_trusted/raw_to_trusted.py
 
       - name: Package trusted_to_refined
         run: |
           cd package
           zip -r ../trusted_to_refined.zip .
           cd ..
-          zip -g trusted_to_refined.zip trusted_to_refined.py
+          zip -g trusted_to_refined.zip lambdas/trusted_to_refined/trusted_to_refined.py
 
       - name: Release
         uses: softprops/action-gh-release@v2
         if: startsWith(github.ref, 'refs/tags/')
         with:
           files: |
-            lambdas/raw_to_trusted/raw_to_trusted.zip
-            lambdas/trusted_to_refined/trusted_to_refined.zip
+            raw_to_trusted.zip
+            trusted_to_refined.zip
           draft: false
           prerelease: false
         env:
