@@ -15,13 +15,14 @@ Para evitar débito técnico e complexidade desnecessária, a pipeline foi simpl
 ## Como Executar
 
 ### Pré-requisitos
+
 - Python 3.10+
 - Bibliotecas: `pandas`, `python-dotenv`
 
 ### Instalação
 
 1.  **Ativar o ambiente virtual:**
-    -   **Windows (PowerShell):** `.\venv\Scripts\Activate.ps1`
+    - **Windows (PowerShell):** `.\venv\Scripts\Activate.ps1`
 
 2.  **Instalar dependências:**
     ```bash
@@ -41,4 +42,5 @@ python trusted_to_refined.py
 ```
 
 ## Estratégia Dev vs Prod
+
 A escolha da arquitetura permite que o `LocalStorageProvider` seja substituído por um `S3StorageProvider` (AWS Glue/S3) apenas alterando a variável de ambiente `PIPELINE_PROFILE`, sem tocar na lógica de negócio.

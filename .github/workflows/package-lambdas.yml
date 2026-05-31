@@ -13,7 +13,11 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
+<<<<<<< HEAD
 
+=======
+    
+>>>>>>> 644bfdbb1d3be7710282eaa67529ca405065619e
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -42,6 +46,7 @@ jobs:
           cd ..
           zip -g trusted_to_refined.zip trusted_to_refined.py
 
+<<<<<<< HEAD
       - name: Package refined_to_socioeconomic
         run: |
           cd package
@@ -56,6 +61,8 @@ jobs:
           cd ..
           zip -g socioeconomic_to_scoring.zip socioeconomic_to_scoring.py
 
+=======
+>>>>>>> 644bfdbb1d3be7710282eaa67529ca405065619e
       - name: Release
         uses: softprops/action-gh-release@v2
         if: startsWith(github.ref, 'refs/tags/')
@@ -63,8 +70,11 @@ jobs:
           files: |
             raw_to_trusted.zip
             trusted_to_refined.zip
+<<<<<<< HEAD
             refined_to_socioeconomic
             socioeconomic_to_scoring
+=======
+>>>>>>> 644bfdbb1d3be7710282eaa67529ca405065619e
           draft: false
           prerelease: false
         env:
@@ -81,5 +91,8 @@ jobs:
           files: |
             raw_to_trusted.zip
             trusted_to_refined.zip
+<<<<<<< HEAD
             refined_to_socioeconomic
             socioeconomic_to_scoring
+=======
+>>>>>>> 644bfdbb1d3be7710282eaa67529ca405065619e

@@ -1,0 +1,1792 @@
+[
+    {
+        "id": 4263,
+        "lat": -25.3005,
+        "lon": -48.149,
+        "city": "Guaraqueçaba",
+        "suburb": "Vila Fátima",
+        "postcode": "desconhecido",
+        "full_address": "Vila Fátima, Guaraqueçaba, Paraná, Região Sul, Brasil",
+        "reject_reason": "missing_required_location_fields"
+    },
+    {
+        "id": 4264,
+        "lat": -25.3005,
+        "lon": -48.049,
+        "city": "desconhecido",
+        "suburb": "desconhecido",
+        "postcode": "desconhecido",
+        "full_address": "São Paulo, Região Sudeste, Brasil",
+        "reject_reason": "missing_required_location_fields"
+    },
+    {
+        "id": 4328,
+        "lat": -25.2005,
+        "lon": -48.149,
+        "city": "Ariri",
+        "suburb": "desconhecido",
+        "postcode": "desconhecido",
+        "full_address": "Ariri, Cananéia, São Paulo, Região Sudeste, Brasil",
+        "reject_reason": "missing_required_location_fields"
+    },
+    {
+        "id": 4329,
+        "lat": -25.2005,
+        "lon": -48.049,
+        "city": "Ariri",
+        "suburb": "desconhecido",
+        "postcode": "desconhecido",
+        "full_address": "Ariri, Cananéia, São Paulo, Brasil, Região Geográfica Intermediária de Sorocaba",
+        "reject_reason": "missing_required_location_fields"
+    },
+    {
+        "id": 4330,
+        "lat": -25.2005,
+        "lon": -47.949,
+        "city": "desconhecido",
+        "suburb": "desconhecido",
+        "postcode": "desconhecido",
+        "full_address": "São Paulo, Região Sudeste, Brasil",
+        "reject_reason": "missing_required_location_fields"
+    },
+    {
+        "id": 4390,
+        "lat": -25.1005,
+        "lon": -48.549,
+        "city": "Campina Grande do Sul",
+        "suburb": "desconhecido",
+        "postcode": "83430-000",
+        "full_address": "Campina Grande do Sul, Paraná, Região Sul, 83430-000, Brasil",
+        "reject_reason": "missing_required_location_fields"
+    },
+    {
+        "id": 4391,
+        "lat": -25.1005,
+        "lon": -48.449,
+        "city": "Guaraqueçaba",
+        "suburb": "desconhecido",
+        "postcode": "desconhecido",
+        "full_address": "Guaraqueçaba, Paraná, Região Sul, Brasil",
+        "reject_reason": "missing_required_location_fields"
+    },
+    {
+        "id": 4392,
+        "lat": -25.1005,
+        "lon": -48.349,
+        "city": "Guaraqueçaba",
+        "suburb": "desconhecido",
+        "postcode": "desconhecido",
+        "full_address": "Guaraqueçaba, Paraná, Região Sul, Brasil",
+        "reject_reason": "missing_required_location_fields"
+    },
+    {
+        "id": 4393,
+        "lat": -25.1005,
+        "lon": -48.249,
+        "city": "Guaraqueçaba",
+        "suburb": "desconhecido",
+        "postcode": "desconhecido",
+        "full_address": "Guaraqueçaba, Paraná, Região Sul, Brasil",
+        "reject_reason": "missing_required_location_fields"
+    },
+    {
+        "id": 4394,
+        "lat": -25.1005,
+        "lon": -48.149,
+        "city": "Cananéia",
+        "suburb": "desconhecido",
+        "postcode": "11990-000",
+        "full_address": "Cananéia, São Paulo, Região Sudeste, 11990-000, Brasil",
+        "reject_reason": "missing_required_location_fields"
+    },
+    {
+        "id": 4395,
+        "lat": -25.1005,
+        "lon": -48.049,
+        "city": "Cananéia",
+        "suburb": "desconhecido",
+        "postcode": "11990-000",
+        "full_address": "Cananéia, São Paulo, Região Sudeste, 11990-000, Brasil",
+        "reject_reason": "missing_required_location_fields"
+    },
+    {
+        "id": 4396,
+        "lat": -25.1005,
+        "lon": -47.949,
+        "city": "Cananéia",
+        "suburb": "desconhecido",
+        "postcode": "11990-000",
+        "full_address": "Cananéia, São Paulo, Região Sudeste, 11990-000, Brasil",
+        "reject_reason": "missing_required_location_fields"
+    },
+    {
+        "id": 4397,
+        "lat": -25.1005,
+        "lon": -47.849,
+        "city": "desconhecido",
+        "suburb": "desconhecido",
+        "postcode": "desconhecido",
+        "full_address": "São Paulo, Região Sudeste, Brasil",
+        "reject_reason": "missing_required_location_fields"
+    },
+    {
+        "id": 4456,
+        "lat": -25.0005,
+        "lon": -48.649,
+        "city": "Campina Grande do Sul",
+        "suburb": "desconhecido",
+        "postcode": "83430-000",
+        "full_address": "Campina Grande do Sul, Paraná, Região Sul, 83430-000, Brasil",
+        "reject_reason": "missing_required_location_fields"
+    },
+    {
+        "id": 4457,
+        "lat": -25.0005,
+        "lon": -48.549,
+        "city": "Barra do Turvo",
+        "suburb": "Pinheirinho",
+        "postcode": "desconhecido",
+        "full_address": "Pinheirinho, Barra do Turvo, São Paulo, Região Sudeste, Brasil",
+        "reject_reason": "missing_required_location_fields"
+    },
+    {
+        "id": 4458,
+        "lat": -25.0005,
+        "lon": -48.449,
+        "city": "Guaraqueçaba",
+        "suburb": "desconhecido",
+        "postcode": "desconhecido",
+        "full_address": "Guaraqueçaba, Paraná, Região Sul, Brasil",
+        "reject_reason": "missing_required_location_fields"
+    },
+    {
+        "id": 4459,
+        "lat": -25.0005,
+        "lon": -48.349,
+        "city": "Barra do Turvo",
+        "suburb": "desconhecido",
+        "postcode": "desconhecido",
+        "full_address": "Barra do Turvo, São Paulo, Região Sudeste, Brasil",
+        "reject_reason": "missing_required_location_fields"
+    },
+    {
+        "id": 4460,
+        "lat": -25.0005,
+        "lon": -48.249,
+        "city": "Barra do Turvo",
+        "suburb": "desconhecido",
+        "postcode": "desconhecido",
+        "full_address": "Barra do Turvo, Guaraqueçaba, Paraná, Região Sul, Brasil, Região Geográfica Intermediária de Curitiba",
+        "reject_reason": "missing_required_location_fields"
+    },
+    {
+        "id": 4461,
+        "lat": -25.0005,
+        "lon": -48.149,
+        "city": "Cananéia",
+        "suburb": "Rio das Minas",
+        "postcode": "desconhecido",
+        "full_address": "Rio das Minas, Cananéia, São Paulo, Região Sudeste, Brasil",
+        "reject_reason": "missing_required_location_fields"
+    },
+    {
+        "id": 4462,
+        "lat": -25.0005,
+        "lon": -48.049,
+        "city": "Cananéia",
+        "suburb": "Boacica",
+        "postcode": "desconhecido",
+        "full_address": "Est. Mun. Colômia da Santa Maria -  Mandira, Boacica, Cananéia, São Paulo, Brasil, Região Geográfica Intermediária de Sorocaba",
+        "reject_reason": "missing_required_location_fields"
+    },
+    {
+        "id": 4463,
+        "lat": -25.0005,
+        "lon": -47.949,
+        "city": "Cananéia",
+        "suburb": "desconhecido",
+        "postcode": "11990-000",
+        "full_address": "Cananéia, São Paulo, 11990-000, Brasil, Região Geográfica Intermediária de Sorocaba",
+        "reject_reason": "missing_required_location_fields"
+    },
+    {
+        "id": 4464,
+        "lat": -25.0005,
+        "lon": -47.849,
+        "city": "desconhecido",
+        "suburb": "desconhecido",
+        "postcode": "desconhecido",
+        "full_address": "São Paulo, Região Sudeste, Brasil",
+        "reject_reason": "missing_required_location_fields"
+    },
+    {
+        "id": 4524,
+        "lat": -24.9005,
+        "lon": -48.549,
+        "city": "Barra do Turvo",
+        "suburb": "desconhecido",
+        "postcode": "desconhecido",
+        "full_address": "Barra do Turvo, São Paulo, Brasil, Região Geográfica Intermediária de Sorocaba",
+        "reject_reason": "missing_required_location_fields"
+    },
+    {
+        "id": 4525,
+        "lat": -24.9005,
+        "lon": -48.449,
+        "city": "Barra do Turvo",
+        "suburb": "desconhecido",
+        "postcode": "desconhecido",
+        "full_address": "Barra do Turvo, São Paulo, Região Sudeste, Brasil",
+        "reject_reason": "missing_required_location_fields"
+    },
+    {
+        "id": 4526,
+        "lat": -24.9005,
+        "lon": -48.349,
+        "city": "Barra do Turvo",
+        "suburb": "desconhecido",
+        "postcode": "desconhecido",
+        "full_address": "Barra do Turvo, São Paulo, Região Sudeste, Brasil",
+        "reject_reason": "missing_required_location_fields"
+    },
+    {
+        "id": 4527,
+        "lat": -24.9005,
+        "lon": -48.249,
+        "city": "Cajati",
+        "suburb": "desconhecido",
+        "postcode": "desconhecido",
+        "full_address": "Rodovia Régis Bittencourt, Cajati, São Paulo, Brasil, Região Geográfica Intermediária de Sorocaba",
+        "reject_reason": "missing_required_location_fields"
+    },
+    {
+        "id": 4528,
+        "lat": -24.9005,
+        "lon": -48.149,
+        "city": "Jacupiranga",
+        "suburb": "desconhecido",
+        "postcode": "desconhecido",
+        "full_address": "Jacupiranga, São Paulo, Região Sudeste, Brasil",
+        "reject_reason": "missing_required_location_fields"
+    },
+    {
+        "id": 4529,
+        "lat": -24.9005,
+        "lon": -48.049,
+        "city": "Jacupiranga",
+        "suburb": "Rio Branco",
+        "postcode": "desconhecido",
+        "full_address": "Rio Branco, Jacupiranga, São Paulo, Brasil, Região Geográfica Intermediária de Sorocaba",
+        "reject_reason": "missing_required_location_fields"
+    },
+    {
+        "id": 4530,
+        "lat": -24.9005,
+        "lon": -47.949,
+        "city": "Cananéia",
+        "suburb": "desconhecido",
+        "postcode": "desconhecido",
+        "full_address": "Fazenda São Miguel, Cananéia, São Paulo, Região Sudeste, Brasil",
+        "reject_reason": "missing_required_location_fields"
+    },
+    {
+        "id": 4531,
+        "lat": -24.9005,
+        "lon": -47.849,
+        "city": "Cananéia",
+        "suburb": "Centro Histórico",
+        "postcode": "desconhecido",
+        "full_address": "Estrada Prefeito José Herculano de Oliveira Rosa, Centro Histórico, Cananéia, São Paulo, Brasil, Região Geográfica Intermediária de Sorocaba",
+        "reject_reason": "missing_required_location_fields"
+    },
+    {
+        "id": 4532,
+        "lat": -24.9005,
+        "lon": -47.749,
+        "city": "Ilha Comprida",
+        "suburb": "desconhecido",
+        "postcode": "desconhecido",
+        "full_address": "Ilha Comprida, São Paulo, Brasil, Região Geográfica Intermediária de Sorocaba",
+        "reject_reason": "missing_required_location_fields"
+    },
+    {
+        "id": 4533,
+        "lat": -24.9005,
+        "lon": -47.649,
+        "city": "desconhecido",
+        "suburb": "desconhecido",
+        "postcode": "desconhecido",
+        "full_address": "São Paulo, Região Sudeste, Brasil",
+        "reject_reason": "missing_required_location_fields"
+    },
+    {
+        "id": 4593,
+        "lat": -24.8005,
+        "lon": -48.549,
+        "city": "Barra do Turvo",
+        "suburb": "Sitio Água Morna",
+        "postcode": "desconhecido",
+        "full_address": "Avenida 21 de Março, Sitio Água Morna, Barra do Turvo, São Paulo, Brasil, Região Geográfica Intermediária de Sorocaba",
+        "reject_reason": "missing_required_location_fields"
+    },
+    {
+        "id": 4594,
+        "lat": -24.8005,
+        "lon": -48.449,
+        "city": "Barra do Turvo",
+        "suburb": "desconhecido",
+        "postcode": "desconhecido",
+        "full_address": "Rua José Maria Bonrruque, Barra do Turvo, São Paulo, Brasil, Região Geográfica Intermediária de Sorocaba",
+        "reject_reason": "missing_required_location_fields"
+    },
+    {
+        "id": 4595,
+        "lat": -24.8005,
+        "lon": -48.349,
+        "city": "Barra do Turvo",
+        "suburb": "desconhecido",
+        "postcode": "desconhecido",
+        "full_address": "Barra do Turvo, São Paulo, Região Sudeste, Brasil",
+        "reject_reason": "missing_required_location_fields"
+    },
+    {
+        "id": 4596,
+        "lat": -24.8005,
+        "lon": -48.249,
+        "city": "Cajati",
+        "suburb": "Bairro dos Queimados",
+        "postcode": "desconhecido",
+        "full_address": "Rua Laranjal - Vila Tatu, Bairro dos Queimados, Cajati, São Paulo, Brasil, Região Geográfica Intermediária de Sorocaba",
+        "reject_reason": "missing_required_location_fields"
+    },
+    {
+        "id": 4597,
+        "lat": -24.8005,
+        "lon": -48.149,
+        "city": "Cajati",
+        "suburb": "Rio Azeite",
+        "postcode": "desconhecido",
+        "full_address": "Rio Azeite, Cajati, São Paulo, Região Sudeste, Brasil",
+        "reject_reason": "missing_required_location_fields"
+    },
+    {
+        "id": 4598,
+        "lat": -24.8005,
+        "lon": -48.049,
+        "city": "Jacupiranga",
+        "suburb": "desconhecido",
+        "postcode": "desconhecido",
+        "full_address": "Braço do Pindaúva, Jacupiranga, São Paulo, Região Sudeste, Brasil",
+        "reject_reason": "missing_required_location_fields"
+    },
+    {
+        "id": 4599,
+        "lat": -24.8005,
+        "lon": -47.949,
+        "city": "Jacupiranga",
+        "suburb": "desconhecido",
+        "postcode": "desconhecido",
+        "full_address": "Jacupiranga, São Paulo, Região Sudeste, Brasil",
+        "reject_reason": "missing_required_location_fields"
+    },
+    {
+        "id": 4600,
+        "lat": -24.8005,
+        "lon": -47.849,
+        "city": "Cananéia",
+        "suburb": "desconhecido",
+        "postcode": "desconhecido",
+        "full_address": "SP-222;BR-101, Cananéia, São Paulo, Brasil, Região Geográfica Intermediária de Sorocaba",
+        "reject_reason": "missing_required_location_fields"
+    },
+    {
+        "id": 4601,
+        "lat": -24.8005,
+        "lon": -47.749,
+        "city": "Iguape",
+        "suburb": "Subaúma",
+        "postcode": "desconhecido",
+        "full_address": "Subaúma, Iguape, São Paulo, Região Sudeste, Brasil",
+        "reject_reason": "missing_required_location_fields"
+    },
+    {
+        "id": 4602,
+        "lat": -24.8005,
+        "lon": -47.649,
+        "city": "Ilha Comprida",
+        "suburb": "desconhecido",
+        "postcode": "desconhecido",
+        "full_address": "Estrada da Vizinhança, Ilha Comprida, São Paulo, Brasil, Região Geográfica Intermediária de Sorocaba",
+        "reject_reason": "missing_required_location_fields"
+    },
+    {
+        "id": 4603,
+        "lat": -24.8005,
+        "lon": -47.549,
+        "city": "desconhecido",
+        "suburb": "desconhecido",
+        "postcode": "desconhecido",
+        "full_address": "São Paulo, Região Sudeste, Brasil",
+        "reject_reason": "missing_required_location_fields"
+    },
+    {
+        "id": 4654,
+        "lat": -24.7005,
+        "lon": -49.349,
+        "city": "Doutor Ulysses",
+        "suburb": "desconhecido",
+        "postcode": "desconhecido",
+        "full_address": "Doutor Ulysses, Paraná, Região Sul, Brasil, Região Geográfica Intermediária de Curitiba",
+        "reject_reason": "missing_required_location_fields"
+    },
+    {
+        "id": 4655,
+        "lat": -24.7005,
+        "lon": -49.249,
+        "city": "Doutor Ulysses",
+        "suburb": "desconhecido",
+        "postcode": "desconhecido",
+        "full_address": "Doutor Ulysses, Paraná, Região Sul, Brasil",
+        "reject_reason": "missing_required_location_fields"
+    },
+    {
+        "id": 4656,
+        "lat": -24.7005,
+        "lon": -49.149,
+        "city": "Cerro Azul",
+        "suburb": "desconhecido",
+        "postcode": "desconhecido",
+        "full_address": "Rocha, Cerro Azul, Paraná, Região Sul, Brasil, Região Geográfica Intermediária de Curitiba",
+        "reject_reason": "missing_required_location_fields"
+    },
+    {
+        "id": 4657,
+        "lat": -24.7005,
+        "lon": -49.049,
+        "city": "Adrianópolis",
+        "suburb": "desconhecido",
+        "postcode": "desconhecido",
+        "full_address": "Adrianópolis, Paraná, Região Sul, Brasil, Região Geográfica Intermediária de Curitiba",
+        "reject_reason": "missing_required_location_fields"
+    },
+    {
+        "id": 4658,
+        "lat": -24.7005,
+        "lon": -48.949,
+        "city": "Adrianópolis",
+        "suburb": "Pinhalzinho",
+        "postcode": "desconhecido",
+        "full_address": "Pinhalzinho, Adrianópolis, Paraná, Região Sul, Brasil",
+        "reject_reason": "missing_required_location_fields"
+    },
+    {
+        "id": 4659,
+        "lat": -24.7005,
+        "lon": -48.849,
+        "city": "Adrianópolis",
+        "suburb": "desconhecido",
+        "postcode": "83490-000",
+        "full_address": "Adrianópolis, Paraná, Região Sul, 83490-000, Brasil",
+        "reject_reason": "missing_required_location_fields"
+    },
+    {
+        "id": 4660,
+        "lat": -24.7005,
+        "lon": -48.749,
+        "city": "Sete Barras",
+        "suburb": "desconhecido",
+        "postcode": "desconhecido",
+        "full_address": "Estrada Principal, Sete Barras, Adrianópolis, Paraná, Região Sul, Brasil, Região Geográfica Intermediária de Curitiba",
+        "reject_reason": "missing_required_location_fields"
+    },
+    {
+        "id": 4661,
+        "lat": -24.7005,
+        "lon": -48.649,
+        "city": "Adrianópolis",
+        "suburb": "desconhecido",
+        "postcode": "83490-000",
+        "full_address": "Adrianópolis, Paraná, Região Sul, 83490-000, Brasil",
+        "reject_reason": "missing_required_location_fields"
+    },
+    {
+        "id": 4662,
+        "lat": -24.7005,
+        "lon": -48.549,
+        "city": "Iporanga",
+        "suburb": "desconhecido",
+        "postcode": "18330-000",
+        "full_address": "Iporanga, São Paulo, Região Sudeste, 18330-000, Brasil",
+        "reject_reason": "missing_required_location_fields"
+    },
+    {
+        "id": 4663,
+        "lat": -24.7005,
+        "lon": -48.449,
+        "city": "Barra do Turvo",
+        "suburb": "desconhecido",
+        "postcode": "desconhecido",
+        "full_address": "Barra do Turvo, São Paulo, Região Sudeste, Brasil",
+        "reject_reason": "missing_required_location_fields"
+    },
+    {
+        "id": 4664,
+        "lat": -24.7005,
+        "lon": -48.349,
+        "city": "Eldorado",
+        "suburb": "Braço",
+        "postcode": "desconhecido",
+        "full_address": "Braço, Eldorado, São Paulo, Região Sudeste, Brasil",
+        "reject_reason": "missing_required_location_fields"
+    },
+    {
+        "id": 4665,
+        "lat": -24.7005,
+        "lon": -48.249,
+        "city": "Eldorado",
+        "suburb": "Braço",
+        "postcode": "desconhecido",
+        "full_address": "Braço, Eldorado, São Paulo, Região Sudeste, Brasil",
+        "reject_reason": "missing_required_location_fields"
+    },
+    {
+        "id": 4666,
+        "lat": -24.7005,
+        "lon": -48.149,
+        "city": "Cajati",
+        "suburb": "Capitão Braz",
+        "postcode": "desconhecido",
+        "full_address": "Capitão Braz, Cajati, São Paulo, Região Sudeste, Brasil",
+        "reject_reason": "missing_required_location_fields"
+    },
+    {
+        "id": 4667,
+        "lat": -24.7005,
+        "lon": -48.049,
+        "city": "Jacupiranga",
+        "suburb": "desconhecido",
+        "postcode": "desconhecido",
+        "full_address": "Estrada Antônio Domingues Chagas, Jacupiranga, São Paulo, Brasil, Região Geográfica Intermediária de Sorocaba",
+        "reject_reason": "missing_required_location_fields"
+    },
+    {
+        "id": 4668,
+        "lat": -24.7005,
+        "lon": -47.949,
+        "city": "Pariquera-Açu",
+        "suburb": "desconhecido",
+        "postcode": "11930-000",
+        "full_address": "Pariquera-Açu, São Paulo, Região Sudeste, 11930-000, Brasil",
+        "reject_reason": "missing_required_location_fields"
+    },
+    {
+        "id": 4669,
+        "lat": -24.7005,
+        "lon": -47.849,
+        "city": "Pariquera-Açu",
+        "suburb": "desconhecido",
+        "postcode": "11930-000",
+        "full_address": "Pariquera-Açu, São Paulo, 11930-000, Brasil, Região Geográfica Intermediária de Sorocaba",
+        "reject_reason": "missing_required_location_fields"
+    },
+    {
+        "id": 4670,
+        "lat": -24.7005,
+        "lon": -47.749,
+        "city": "Iguape",
+        "suburb": "desconhecido",
+        "postcode": "desconhecido",
+        "full_address": "Iguape, São Paulo, Região Sudeste, Brasil, Região Geográfica Intermediária de Sorocaba",
+        "reject_reason": "missing_required_location_fields"
+    },
+    {
+        "id": 4671,
+        "lat": -24.7005,
+        "lon": -47.649,
+        "city": "Iguape",
+        "suburb": "desconhecido",
+        "postcode": "desconhecido",
+        "full_address": "Iguape, São Paulo, Região Sudeste, Brasil, Região Geográfica Intermediária de Sorocaba",
+        "reject_reason": "missing_required_location_fields"
+    },
+    {
+        "id": 4672,
+        "lat": -24.7005,
+        "lon": -47.549,
+        "city": "Iguape",
+        "suburb": "desconhecido",
+        "postcode": "11920-000",
+        "full_address": "Trilha da Pedra Lisa, Iguape, São Paulo, 11920-000, Brasil, Região Geográfica Intermediária de Sorocaba",
+        "reject_reason": "missing_required_location_fields"
+    },
+    {
+        "id": 4673,
+        "lat": -24.7005,
+        "lon": -47.449,
+        "city": "Ilha Comprida",
+        "suburb": "desconhecido",
+        "postcode": "desconhecido",
+        "full_address": "Alameda Rosane Moreira Sampaio Barbosa, Ilha Comprida, São Paulo, Brasil, Região Geográfica Intermediária de Sorocaba",
+        "reject_reason": "missing_required_location_fields"
+    },
+    {
+        "id": 4674,
+        "lat": -24.7005,
+        "lon": -47.349,
+        "city": "desconhecido",
+        "suburb": "desconhecido",
+        "postcode": "desconhecido",
+        "full_address": "São Paulo, Região Sudeste, Brasil",
+        "reject_reason": "missing_required_location_fields"
+    },
+    {
+        "id": 4725,
+        "lat": -24.6005,
+        "lon": -49.349,
+        "city": "Doutor Ulysses",
+        "suburb": "desconhecido",
+        "postcode": "desconhecido",
+        "full_address": "Doutor Ulysses, Paraná, Região Sul, Brasil, Região Geográfica Intermediária de Curitiba",
+        "reject_reason": "missing_required_location_fields"
+    },
+    {
+        "id": 4726,
+        "lat": -24.6005,
+        "lon": -49.249,
+        "city": "Itapirapuã Paulista",
+        "suburb": "desconhecido",
+        "postcode": "desconhecido",
+        "full_address": "Itapirapuã Paulista, São Paulo, Região Sudeste, Brasil",
+        "reject_reason": "missing_required_location_fields"
+    },
+    {
+        "id": 4727,
+        "lat": -24.6005,
+        "lon": -49.149,
+        "city": "Ribeira",
+        "suburb": "desconhecido",
+        "postcode": "desconhecido",
+        "full_address": "Ribeira, São Paulo, Região Sudeste, Brasil",
+        "reject_reason": "missing_required_location_fields"
+    },
+    {
+        "id": 4728,
+        "lat": -24.6005,
+        "lon": -49.049,
+        "city": "Ribeira",
+        "suburb": "Catas Altas",
+        "postcode": "desconhecido",
+        "full_address": "Catas Altas, Ribeira, São Paulo, Região Sudeste, Brasil",
+        "reject_reason": "missing_required_location_fields"
+    },
+    {
+        "id": 4729,
+        "lat": -24.6005,
+        "lon": -48.949,
+        "city": "Ribeira",
+        "suburb": "Saltinho",
+        "postcode": "desconhecido",
+        "full_address": "Saltinho, Ribeira, São Paulo, Região Sudeste, Brasil",
+        "reject_reason": "missing_required_location_fields"
+    },
+    {
+        "id": 4731,
+        "lat": -24.6005,
+        "lon": -48.749,
+        "city": "Iporanga",
+        "suburb": "desconhecido",
+        "postcode": "18330-000",
+        "full_address": "Iporanga, São Paulo, Região Sudeste, 18330-000, Brasil",
+        "reject_reason": "missing_required_location_fields"
+    },
+    {
+        "id": 4732,
+        "lat": -24.6005,
+        "lon": -48.649,
+        "city": "Iporanga",
+        "suburb": "desconhecido",
+        "postcode": "18330-000",
+        "full_address": "Iporanga, São Paulo, Região Sudeste, 18330-000, Brasil",
+        "reject_reason": "missing_required_location_fields"
+    },
+    {
+        "id": 4733,
+        "lat": -24.6005,
+        "lon": -48.549,
+        "city": "Iporanga",
+        "suburb": "desconhecido",
+        "postcode": "18330-000",
+        "full_address": "Iporanga, São Paulo, Região Sudeste, 18330-000, Brasil",
+        "reject_reason": "missing_required_location_fields"
+    },
+    {
+        "id": 4734,
+        "lat": -24.6005,
+        "lon": -48.449,
+        "city": "Iporanga",
+        "suburb": "Nhunguara",
+        "postcode": "desconhecido",
+        "full_address": "Nhunguara, Iporanga, São Paulo, Brasil, Região Geográfica Intermediária de Sorocaba",
+        "reject_reason": "missing_required_location_fields"
+    },
+    {
+        "id": 4735,
+        "lat": -24.6005,
+        "lon": -48.349,
+        "city": "Eldorado",
+        "suburb": "André Lopes",
+        "postcode": "desconhecido",
+        "full_address": "Rodovia Benedito Pascoal de França, André Lopes, Itapeúna, Eldorado, São Paulo, Região Sudeste, Brasil",
+        "reject_reason": "missing_required_location_fields"
+    },
+    {
+        "id": 4736,
+        "lat": -24.6005,
+        "lon": -48.249,
+        "city": "Eldorado",
+        "suburb": "Barra do Batatal",
+        "postcode": "desconhecido",
+        "full_address": "Barra do Batatal, Itapeúna, Eldorado, São Paulo, Região Sudeste, Brasil",
+        "reject_reason": "missing_required_location_fields"
+    },
+    {
+        "id": 4737,
+        "lat": -24.6005,
+        "lon": -48.149,
+        "city": "Eldorado",
+        "suburb": "desconhecido",
+        "postcode": "desconhecido",
+        "full_address": "Eldorado, São Paulo, Brasil, Região Geográfica Intermediária de Sorocaba",
+        "reject_reason": "missing_required_location_fields"
+    },
+    {
+        "id": 4738,
+        "lat": -24.6005,
+        "lon": -48.049,
+        "city": "Jacupiranga",
+        "suburb": "Bairro Padre André",
+        "postcode": "desconhecido",
+        "full_address": "Bairro Padre André, Jacupiranga, São Paulo, Região Sudeste, Brasil",
+        "reject_reason": "missing_required_location_fields"
+    },
+    {
+        "id": 4739,
+        "lat": -24.6005,
+        "lon": -47.949,
+        "city": "Registro",
+        "suburb": "Bairro Indaiatuba",
+        "postcode": "desconhecido",
+        "full_address": "Estrada do Indaiatuba, Bairro Indaiatuba, Registro, São Paulo, Brasil, Região Geográfica Intermediária de Sorocaba",
+        "reject_reason": "missing_required_location_fields"
+    },
+    {
+        "id": 4740,
+        "lat": -24.6005,
+        "lon": -47.849,
+        "city": "Pariquera-Açu",
+        "suburb": "Angatuba",
+        "postcode": "desconhecido",
+        "full_address": "Angatuba, Pariquera-Açu, São Paulo, Brasil, Região Geográfica Intermediária de Sorocaba",
+        "reject_reason": "missing_required_location_fields"
+    },
+    {
+        "id": 4741,
+        "lat": -24.6005,
+        "lon": -47.749,
+        "city": "Pariquera-Açu",
+        "suburb": "desconhecido",
+        "postcode": "desconhecido",
+        "full_address": "Pariquera-Açu, São Paulo, Brasil, Região Geográfica Intermediária de Sorocaba",
+        "reject_reason": "missing_required_location_fields"
+    },
+    {
+        "id": 4742,
+        "lat": -24.6005,
+        "lon": -47.649,
+        "city": "Iguape",
+        "suburb": "Peropava",
+        "postcode": "desconhecido",
+        "full_address": "Peropava, Iguape, São Paulo, Região Sudeste, Brasil",
+        "reject_reason": "missing_required_location_fields"
+    },
+    {
+        "id": 4743,
+        "lat": -24.6005,
+        "lon": -47.549,
+        "city": "Iguape",
+        "suburb": "desconhecido",
+        "postcode": "desconhecido",
+        "full_address": "Rodovia Prefeito Casemiro Teixeira, Iguape, São Paulo, Brasil, Região Geográfica Intermediária de Sorocaba",
+        "reject_reason": "missing_required_location_fields"
+    },
+    {
+        "id": 4744,
+        "lat": -24.6005,
+        "lon": -47.449,
+        "city": "Iguape",
+        "suburb": "desconhecido",
+        "postcode": "11920-000",
+        "full_address": "Iguape, São Paulo, Região Sudeste, 11920-000, Brasil",
+        "reject_reason": "missing_required_location_fields"
+    },
+    {
+        "id": 4745,
+        "lat": -24.6005,
+        "lon": -47.349,
+        "city": "Iguape",
+        "suburb": "desconhecido",
+        "postcode": "11920-000",
+        "full_address": "Iguape, São Paulo, Região Sudeste, 11920-000, Brasil",
+        "reject_reason": "missing_required_location_fields"
+    },
+    {
+        "id": 4746,
+        "lat": -24.6005,
+        "lon": -47.249,
+        "city": "desconhecido",
+        "suburb": "desconhecido",
+        "postcode": "desconhecido",
+        "full_address": "São Paulo, Região Sudeste, Brasil",
+        "reject_reason": "missing_required_location_fields"
+    },
+    {
+        "id": 4797,
+        "lat": -24.5005,
+        "lon": -49.349,
+        "city": "Doutor Ulysses",
+        "suburb": "desconhecido",
+        "postcode": "desconhecido",
+        "full_address": "Doutor Ulysses, Paraná, Região Sul, Brasil",
+        "reject_reason": "missing_required_location_fields"
+    },
+    {
+        "id": 4798,
+        "lat": -24.5005,
+        "lon": -49.249,
+        "city": "Itapirapuã Paulista",
+        "suburb": "Ribeirão da Várzea",
+        "postcode": "desconhecido",
+        "full_address": "Ribeirão da Várzea, Itapirapuã Paulista, São Paulo, Região Sudeste, Brasil",
+        "reject_reason": "missing_required_location_fields"
+    },
+    {
+        "id": 4799,
+        "lat": -24.5005,
+        "lon": -49.149,
+        "city": "Itapirapuã Paulista",
+        "suburb": "CAPELA",
+        "postcode": "desconhecido",
+        "full_address": "CAPELA, Itapirapuã Paulista, São Paulo, Região Sudeste, Brasil",
+        "reject_reason": "missing_required_location_fields"
+    },
+    {
+        "id": 4800,
+        "lat": -24.5005,
+        "lon": -49.049,
+        "city": "Barra do Chapéu",
+        "suburb": "desconhecido",
+        "postcode": "desconhecido",
+        "full_address": "Barra do Chapéu, São Paulo, Brasil, Região Geográfica Intermediária de Sorocaba",
+        "reject_reason": "missing_required_location_fields"
+    },
+    {
+        "id": 4801,
+        "lat": -24.5005,
+        "lon": -48.949,
+        "city": "Apiaí",
+        "suburb": "desconhecido",
+        "postcode": "18320-000",
+        "full_address": "Apiaí, São Paulo, Região Sudeste, 18320-000, Brasil",
+        "reject_reason": "missing_required_location_fields"
+    },
+    {
+        "id": 4803,
+        "lat": -24.5005,
+        "lon": -48.749,
+        "city": "Apiaí",
+        "suburb": "desconhecido",
+        "postcode": "18320-000",
+        "full_address": "Apiaí, São Paulo, Região Sudeste, 18320-000, Brasil",
+        "reject_reason": "missing_required_location_fields"
+    },
+    {
+        "id": 4804,
+        "lat": -24.5005,
+        "lon": -48.649,
+        "city": "Iporanga",
+        "suburb": "desconhecido",
+        "postcode": "18330-000",
+        "full_address": "Iporanga, São Paulo, Região Sudeste, 18330-000, Brasil",
+        "reject_reason": "missing_required_location_fields"
+    },
+    {
+        "id": 4805,
+        "lat": -24.5005,
+        "lon": -48.549,
+        "city": "Iporanga",
+        "suburb": "desconhecido",
+        "postcode": "18330-000",
+        "full_address": "Iporanga, São Paulo, Região Sudeste, 18330-000, Brasil",
+        "reject_reason": "missing_required_location_fields"
+    },
+    {
+        "id": 4806,
+        "lat": -24.5005,
+        "lon": -48.449,
+        "city": "Iporanga",
+        "suburb": "Porto dos Pilões",
+        "postcode": "desconhecido",
+        "full_address": "Porto dos Pilões, Iporanga, São Paulo, Região Sudeste, Brasil",
+        "reject_reason": "missing_required_location_fields"
+    },
+    {
+        "id": 4807,
+        "lat": -24.5005,
+        "lon": -48.349,
+        "city": "Eldorado",
+        "suburb": "desconhecido",
+        "postcode": "desconhecido",
+        "full_address": "Itapeúna, Eldorado, São Paulo, Região Sudeste, Brasil",
+        "reject_reason": "missing_required_location_fields"
+    },
+    {
+        "id": 4808,
+        "lat": -24.5005,
+        "lon": -48.249,
+        "city": "Eldorado",
+        "suburb": "desconhecido",
+        "postcode": "desconhecido",
+        "full_address": "Itapeúna, Eldorado, São Paulo, Região Sudeste, Brasil",
+        "reject_reason": "missing_required_location_fields"
+    },
+    {
+        "id": 4809,
+        "lat": -24.5005,
+        "lon": -48.149,
+        "city": "Eldorado",
+        "suburb": "desconhecido",
+        "postcode": "desconhecido",
+        "full_address": "Eldorado, São Paulo, Brasil, Região Geográfica Intermediária de Sorocaba",
+        "reject_reason": "missing_required_location_fields"
+    },
+    {
+        "id": 4810,
+        "lat": -24.5005,
+        "lon": -48.049,
+        "city": "Eldorado",
+        "suburb": "Bairro Ilha Rasa",
+        "postcode": "desconhecido",
+        "full_address": "Bairro Ilha Rasa, Eldorado, São Paulo, Brasil, Região Geográfica Intermediária de Sorocaba",
+        "reject_reason": "missing_required_location_fields"
+    },
+    {
+        "id": 4811,
+        "lat": -24.5005,
+        "lon": -47.949,
+        "city": "Registro",
+        "suburb": "Manga Larga",
+        "postcode": "desconhecido",
+        "full_address": "Manga Larga, Registro, São Paulo, Brasil, Região Geográfica Intermediária de Sorocaba",
+        "reject_reason": "missing_required_location_fields"
+    },
+    {
+        "id": 4813,
+        "lat": -24.5005,
+        "lon": -47.749,
+        "city": "Registro",
+        "suburb": "Vila Paraguai",
+        "postcode": "desconhecido",
+        "full_address": "Estrada Municipal José Antônio Cabral, Vila Paraguai, Registro, São Paulo, Região Sudeste, Brasil, Região Geográfica Intermediária de Sorocaba",
+        "reject_reason": "missing_required_location_fields"
+    },
+    {
+        "id": 4814,
+        "lat": -24.5005,
+        "lon": -47.649,
+        "city": "Registro",
+        "suburb": "Vila Guanandi",
+        "postcode": "desconhecido",
+        "full_address": "Vila Guanandi, Registro, São Paulo, Região Sudeste, Brasil",
+        "reject_reason": "missing_required_location_fields"
+    },
+    {
+        "id": 4815,
+        "lat": -24.5005,
+        "lon": -47.549,
+        "city": "Iguape",
+        "suburb": "desconhecido",
+        "postcode": "desconhecido",
+        "full_address": "Iguape, São Paulo, Brasil, Região Geográfica Intermediária de Sorocaba",
+        "reject_reason": "missing_required_location_fields"
+    },
+    {
+        "id": 4816,
+        "lat": -24.5005,
+        "lon": -47.449,
+        "city": "Iguape",
+        "suburb": "desconhecido",
+        "postcode": "11920-000",
+        "full_address": "Iguape, São Paulo, Região Sudeste, 11920-000, Brasil",
+        "reject_reason": "missing_required_location_fields"
+    },
+    {
+        "id": 4817,
+        "lat": -24.5005,
+        "lon": -47.349,
+        "city": "Iguape",
+        "suburb": "desconhecido",
+        "postcode": "11920-000",
+        "full_address": "Iguape, São Paulo, Região Sudeste, 11920-000, Brasil",
+        "reject_reason": "missing_required_location_fields"
+    },
+    {
+        "id": 4818,
+        "lat": -24.5005,
+        "lon": -47.249,
+        "city": "Iguape",
+        "suburb": "desconhecido",
+        "postcode": "11920-000",
+        "full_address": "Iguape, São Paulo, Região Sudeste, 11920-000, Brasil",
+        "reject_reason": "missing_required_location_fields"
+    },
+    {
+        "id": 4819,
+        "lat": -24.5005,
+        "lon": -47.149,
+        "city": "desconhecido",
+        "suburb": "desconhecido",
+        "postcode": "desconhecido",
+        "full_address": "São Paulo, Região Sudeste, Brasil",
+        "reject_reason": "missing_required_location_fields"
+    },
+    {
+        "id": 4820,
+        "lat": -24.5005,
+        "lon": -47.049,
+        "city": "desconhecido",
+        "suburb": "desconhecido",
+        "postcode": "desconhecido",
+        "full_address": "São Paulo, Região Sudeste, Brasil",
+        "reject_reason": "missing_required_location_fields"
+    },
+    {
+        "id": 4821,
+        "lat": -24.5005,
+        "lon": -46.649,
+        "city": "desconhecido",
+        "suburb": "desconhecido",
+        "postcode": "desconhecido",
+        "full_address": "São Paulo, Região Sudeste, Brasil",
+        "reject_reason": "missing_required_location_fields"
+    },
+    {
+        "id": 4873,
+        "lat": -24.4005,
+        "lon": -49.249,
+        "city": "Bom Sucesso de Itararé",
+        "suburb": "desconhecido",
+        "postcode": "desconhecido",
+        "full_address": "Bom Sucesso de Itararé, São Paulo, Região Sul, Brasil, Região Geográfica Intermediária de Sorocaba",
+        "reject_reason": "missing_required_location_fields"
+    },
+    {
+        "id": 4874,
+        "lat": -24.4005,
+        "lon": -49.149,
+        "city": "Barra do Chapéu",
+        "suburb": "desconhecido",
+        "postcode": "desconhecido",
+        "full_address": "Barra do Chapéu, São Paulo, Região Sudeste, Brasil",
+        "reject_reason": "missing_required_location_fields"
+    },
+    {
+        "id": 4875,
+        "lat": -24.4005,
+        "lon": -49.049,
+        "city": "Barra do Chapéu",
+        "suburb": "desconhecido",
+        "postcode": "desconhecido",
+        "full_address": "Barra do Chapéu, São Paulo, Região Sudeste, Brasil",
+        "reject_reason": "missing_required_location_fields"
+    },
+    {
+        "id": 4876,
+        "lat": -24.4005,
+        "lon": -48.949,
+        "city": "Lageado de Araçaíba",
+        "suburb": "Barro Branco",
+        "postcode": "desconhecido",
+        "full_address": "Barro Branco, Lageado de Araçaíba, Apiaí, São Paulo, Brasil, Região Geográfica Intermediária de Sorocaba",
+        "reject_reason": "missing_required_location_fields"
+    },
+    {
+        "id": 4877,
+        "lat": -24.4005,
+        "lon": -48.849,
+        "city": "Apiaí",
+        "suburb": "desconhecido",
+        "postcode": "desconhecido",
+        "full_address": "Araçaíba, Apiaí, São Paulo, Região Sudeste, Brasil",
+        "reject_reason": "missing_required_location_fields"
+    },
+    {
+        "id": 4878,
+        "lat": -24.4005,
+        "lon": -48.749,
+        "city": "Apiaí",
+        "suburb": "desconhecido",
+        "postcode": "18320-000",
+        "full_address": "Apiaí, São Paulo, Região Sudeste, 18320-000, Brasil",
+        "reject_reason": "missing_required_location_fields"
+    },
+    {
+        "id": 4879,
+        "lat": -24.4005,
+        "lon": -48.649,
+        "city": "Apiaí",
+        "suburb": "desconhecido",
+        "postcode": "desconhecido",
+        "full_address": "Rodovia Sebastião Ferraz de Camargo Penteado, Apiaí, São Paulo, Brasil, Região Geográfica Intermediária de Sorocaba",
+        "reject_reason": "missing_required_location_fields"
+    },
+    {
+        "id": 4880,
+        "lat": -24.4005,
+        "lon": -48.549,
+        "city": "Apiaí",
+        "suburb": "desconhecido",
+        "postcode": "18320-000",
+        "full_address": "Apiaí, São Paulo, Região Sudeste, 18320-000, Brasil",
+        "reject_reason": "missing_required_location_fields"
+    },
+    {
+        "id": 4881,
+        "lat": -24.4005,
+        "lon": -48.449,
+        "city": "Iporanga",
+        "suburb": "desconhecido",
+        "postcode": "18330-000",
+        "full_address": "Iporanga, São Paulo, Região Sudeste, 18330-000, Brasil",
+        "reject_reason": "missing_required_location_fields"
+    },
+    {
+        "id": 4882,
+        "lat": -24.4005,
+        "lon": -48.349,
+        "city": "Eldorado",
+        "suburb": "desconhecido",
+        "postcode": "desconhecido",
+        "full_address": "Itapeúna, Eldorado, São Paulo, Região Sudeste, Brasil",
+        "reject_reason": "missing_required_location_fields"
+    },
+    {
+        "id": 4883,
+        "lat": -24.4005,
+        "lon": -48.249,
+        "city": "Eldorado",
+        "suburb": "Itapeúna",
+        "postcode": "desconhecido",
+        "full_address": "Itapeúna, Eldorado, São Paulo, Região Sudeste, Brasil",
+        "reject_reason": "missing_required_location_fields"
+    },
+    {
+        "id": 4884,
+        "lat": -24.4005,
+        "lon": -48.149,
+        "city": "Eldorado",
+        "suburb": "desconhecido",
+        "postcode": "11960-000",
+        "full_address": "Eldorado, São Paulo, Região Sudeste, 11960-000, Brasil",
+        "reject_reason": "missing_required_location_fields"
+    },
+    {
+        "id": 4885,
+        "lat": -24.4005,
+        "lon": -48.049,
+        "city": "Eldorado",
+        "suburb": "desconhecido",
+        "postcode": "desconhecido",
+        "full_address": "Eldorado, São Paulo, Brasil, Região Geográfica Intermediária de Sorocaba",
+        "reject_reason": "missing_required_location_fields"
+    },
+    {
+        "id": 4887,
+        "lat": -24.4005,
+        "lon": -47.849,
+        "city": "Sete Barras",
+        "suburb": "Bairro Pocinho do Rebojo",
+        "postcode": "desconhecido",
+        "full_address": "Bairro Pocinho do Rebojo, Sete Barras, São Paulo, Região Sudeste, Brasil",
+        "reject_reason": "missing_required_location_fields"
+    },
+    {
+        "id": 4888,
+        "lat": -24.4005,
+        "lon": -47.749,
+        "city": "Registro",
+        "suburb": "Bairro Serrote Norte",
+        "postcode": "desconhecido",
+        "full_address": "Bairro Serrote Norte, Registro, São Paulo, Brasil, Região Geográfica Intermediária de Sorocaba",
+        "reject_reason": "missing_required_location_fields"
+    },
+    {
+        "id": 4889,
+        "lat": -24.4005,
+        "lon": -47.649,
+        "city": "Iguape",
+        "suburb": "desconhecido",
+        "postcode": "11920-000",
+        "full_address": "Iguape, São Paulo, Região Sudeste, 11920-000, Brasil",
+        "reject_reason": "missing_required_location_fields"
+    },
+    {
+        "id": 4890,
+        "lat": -24.4005,
+        "lon": -47.549,
+        "city": "Iguape",
+        "suburb": "desconhecido",
+        "postcode": "desconhecido",
+        "full_address": "Iguape, São Paulo, Brasil, Região Geográfica Intermediária de Sorocaba",
+        "reject_reason": "missing_required_location_fields"
+    },
+    {
+        "id": 4891,
+        "lat": -24.4005,
+        "lon": -47.449,
+        "city": "Iguape",
+        "suburb": "desconhecido",
+        "postcode": "11920-000",
+        "full_address": "Iguape, São Paulo, Região Sudeste, 11920-000, Brasil",
+        "reject_reason": "missing_required_location_fields"
+    },
+    {
+        "id": 4892,
+        "lat": -24.4005,
+        "lon": -47.349,
+        "city": "Iguape",
+        "suburb": "desconhecido",
+        "postcode": "11920-000",
+        "full_address": "Iguape, São Paulo, Região Sudeste, 11920-000, Brasil",
+        "reject_reason": "missing_required_location_fields"
+    },
+    {
+        "id": 4893,
+        "lat": -24.4005,
+        "lon": -47.249,
+        "city": "Iguape",
+        "suburb": "desconhecido",
+        "postcode": "11920-000",
+        "full_address": "Iguape, São Paulo, Região Sudeste, 11920-000, Brasil",
+        "reject_reason": "missing_required_location_fields"
+    },
+    {
+        "id": 4894,
+        "lat": -24.4005,
+        "lon": -47.149,
+        "city": "Iguape",
+        "suburb": "desconhecido",
+        "postcode": "11920-000",
+        "full_address": "Iguape, São Paulo, Região Sudeste, 11920-000, Brasil",
+        "reject_reason": "missing_required_location_fields"
+    },
+    {
+        "id": 4895,
+        "lat": -24.4005,
+        "lon": -47.049,
+        "city": "Peruíbe",
+        "suburb": "desconhecido",
+        "postcode": "desconhecido",
+        "full_address": "Peruíbe, São Paulo, Região Sudeste, Brasil",
+        "reject_reason": "missing_required_location_fields"
+    },
+    {
+        "id": 4896,
+        "lat": -24.4005,
+        "lon": -46.949,
+        "city": "desconhecido",
+        "suburb": "desconhecido",
+        "postcode": "desconhecido",
+        "full_address": "São Paulo, Região Sudeste, Brasil",
+        "reject_reason": "missing_required_location_fields"
+    },
+    {
+        "id": 4897,
+        "lat": -24.4005,
+        "lon": -46.849,
+        "city": "desconhecido",
+        "suburb": "desconhecido",
+        "postcode": "desconhecido",
+        "full_address": "São Paulo, Região Sudeste, Brasil",
+        "reject_reason": "missing_required_location_fields"
+    },
+    {
+        "id": 4949,
+        "lat": -24.3005,
+        "lon": -49.349,
+        "city": "Sengés",
+        "suburb": "desconhecido",
+        "postcode": "desconhecido",
+        "full_address": "Sengés, Paraná, Região Sul, Brasil",
+        "reject_reason": "missing_required_location_fields"
+    },
+    {
+        "id": 4950,
+        "lat": -24.3005,
+        "lon": -49.249,
+        "city": "Itararé",
+        "suburb": "desconhecido",
+        "postcode": "desconhecido",
+        "full_address": "Itararé, São Paulo, Brasil, Região Geográfica Intermediária de Sorocaba",
+        "reject_reason": "missing_required_location_fields"
+    },
+    {
+        "id": 4951,
+        "lat": -24.3005,
+        "lon": -49.149,
+        "city": "Bom Sucesso de Itararé",
+        "suburb": "Cruz da Penha",
+        "postcode": "desconhecido",
+        "full_address": "Estrada Velha Bom Sucesso de Itararé, Cruz da Penha, Bom Sucesso de Itararé, São Paulo, Brasil, Região Geográfica Intermediária de Sorocaba",
+        "reject_reason": "missing_required_location_fields"
+    },
+    {
+        "id": 4952,
+        "lat": -24.3005,
+        "lon": -49.049,
+        "city": "Palmitalzinho",
+        "suburb": "desconhecido",
+        "postcode": "desconhecido",
+        "full_address": "Palmitalzinho, Apiaí, São Paulo, Região Sudeste, Brasil",
+        "reject_reason": "missing_required_location_fields"
+    },
+    {
+        "id": 4953,
+        "lat": -24.3005,
+        "lon": -48.949,
+        "city": "Campina de Fora",
+        "suburb": "Bairro de Baixo",
+        "postcode": "desconhecido",
+        "full_address": "Bairro de Baixo, Campina de Fora, Ribeirão Branco, São Paulo, Brasil, Região Geográfica Intermediária de Sorocaba",
+        "reject_reason": "missing_required_location_fields"
+    },
+    {
+        "id": 4954,
+        "lat": -24.3005,
+        "lon": -48.849,
+        "city": "Itabôa",
+        "suburb": "Kantian",
+        "postcode": "desconhecido",
+        "full_address": "Kantian, Itabôa, Ribeirão Branco, São Paulo, Brasil, Região Geográfica Intermediária de Sorocaba",
+        "reject_reason": "missing_required_location_fields"
+    },
+    {
+        "id": 4955,
+        "lat": -24.3005,
+        "lon": -48.749,
+        "city": "Ribeirão Branco",
+        "suburb": "Bairro Santa Clara",
+        "postcode": "desconhecido",
+        "full_address": "Bairro Santa Clara, Ribeirão Branco, São Paulo, Região Sudeste, Brasil",
+        "reject_reason": "missing_required_location_fields"
+    },
+    {
+        "id": 4956,
+        "lat": -24.3005,
+        "lon": -48.649,
+        "city": "Ribeirão Branco",
+        "suburb": "Bairro do Pinhal",
+        "postcode": "desconhecido",
+        "full_address": "Bairro do Pinhal, Ribeirão Branco, São Paulo, Região Sudeste, Brasil",
+        "reject_reason": "missing_required_location_fields"
+    },
+    {
+        "id": 4957,
+        "lat": -24.3005,
+        "lon": -48.549,
+        "city": "Guapiara",
+        "suburb": "desconhecido",
+        "postcode": "desconhecido",
+        "full_address": "Guapiara, São Paulo, Brasil, Região Geográfica Intermediária de Sorocaba",
+        "reject_reason": "missing_required_location_fields"
+    },
+    {
+        "id": 4958,
+        "lat": -24.3005,
+        "lon": -48.449,
+        "city": "Iporanga",
+        "suburb": "desconhecido",
+        "postcode": "18330-000",
+        "full_address": "Iporanga, São Paulo, Região Sudeste, 18330-000, Brasil",
+        "reject_reason": "missing_required_location_fields"
+    },
+    {
+        "id": 4959,
+        "lat": -24.3005,
+        "lon": -48.349,
+        "city": "Eldorado",
+        "suburb": "desconhecido",
+        "postcode": "desconhecido",
+        "full_address": "Base Barra Grande, Itapeúna, Eldorado, São Paulo, Região Sudeste, Brasil",
+        "reject_reason": "missing_required_location_fields"
+    },
+    {
+        "id": 4960,
+        "lat": -24.3005,
+        "lon": -48.249,
+        "city": "Eldorado",
+        "suburb": "desconhecido",
+        "postcode": "desconhecido",
+        "full_address": "Itapeúna, Eldorado, São Paulo, Região Sudeste, Brasil",
+        "reject_reason": "missing_required_location_fields"
+    },
+    {
+        "id": 4961,
+        "lat": -24.3005,
+        "lon": -48.149,
+        "city": "Eldorado",
+        "suburb": "desconhecido",
+        "postcode": "11960-000",
+        "full_address": "Eldorado, São Paulo, Região Sudeste, 11960-000, Brasil",
+        "reject_reason": "missing_required_location_fields"
+    },
+    {
+        "id": 4962,
+        "lat": -24.3005,
+        "lon": -48.049,
+        "city": "Sete Barras",
+        "suburb": "Canela Parda",
+        "postcode": "desconhecido",
+        "full_address": "Estrada de Guapiruvu, Canela Parda, Sete Barras, São Paulo, Brasil, Região Geográfica Intermediária de Sorocaba",
+        "reject_reason": "missing_required_location_fields"
+    },
+    {
+        "id": 4963,
+        "lat": -24.3005,
+        "lon": -47.949,
+        "city": "Sete Barras",
+        "suburb": "Barra do Ribeirão da Serra",
+        "postcode": "desconhecido",
+        "full_address": "Rodovia Nequinho Fogaça, Barra do Ribeirão da Serra, Sete Barras, São Paulo, Região Sudeste, Brasil, Região Geográfica Intermediária de Sorocaba",
+        "reject_reason": "missing_required_location_fields"
+    },
+    {
+        "id": 4964,
+        "lat": -24.3005,
+        "lon": -47.849,
+        "city": "Sete Barras",
+        "suburb": "desconhecido",
+        "postcode": "11910-000",
+        "full_address": "Sete Barras, São Paulo, Região Sudeste, 11910-000, Brasil",
+        "reject_reason": "missing_required_location_fields"
+    },
+    {
+        "id": 4965,
+        "lat": -24.3005,
+        "lon": -47.749,
+        "city": "Juquiá",
+        "suburb": "desconhecido",
+        "postcode": "desconhecido",
+        "full_address": "Juquiá, São Paulo, Brasil, Região Geográfica Intermediária de Sorocaba",
+        "reject_reason": "missing_required_location_fields"
+    },
+    {
+        "id": 4967,
+        "lat": -24.3005,
+        "lon": -47.549,
+        "city": "Miracatu",
+        "suburb": "Oliveira Barros",
+        "postcode": "desconhecido",
+        "full_address": "Santa Rita de Cassia, Oliveira Barros, Miracatu, São Paulo, Região Sudeste, Brasil, Região Geográfica Intermediária de Sorocaba",
+        "reject_reason": "missing_required_location_fields"
+    },
+    {
+        "id": 4968,
+        "lat": -24.3005,
+        "lon": -47.449,
+        "city": "Miracatu",
+        "suburb": "desconhecido",
+        "postcode": "desconhecido",
+        "full_address": "Miracatu, São Paulo, Brasil, Região Geográfica Intermediária de Sorocaba",
+        "reject_reason": "missing_required_location_fields"
+    },
+    {
+        "id": 4969,
+        "lat": -24.3005,
+        "lon": -47.349,
+        "city": "Miracatu",
+        "suburb": "Pedro Barros",
+        "postcode": "desconhecido",
+        "full_address": "Pedro Barros, Miracatu, São Paulo, Região Sudeste, Brasil, Região Geográfica Intermediária de Sorocaba",
+        "reject_reason": "missing_required_location_fields"
+    },
+    {
+        "id": 4970,
+        "lat": -24.3005,
+        "lon": -47.249,
+        "city": "Pedro de Toledo",
+        "suburb": "Jardim do Caju",
+        "postcode": "desconhecido",
+        "full_address": "Rua Hum - Três Barras, Jardim do Caju, Pedro de Toledo, São Paulo, Região Sudeste, Brasil",
+        "reject_reason": "missing_required_location_fields"
+    },
+    {
+        "id": 4972,
+        "lat": -24.3005,
+        "lon": -47.049,
+        "city": "Itariri",
+        "suburb": "Nova Itariri",
+        "postcode": "desconhecido",
+        "full_address": "Rodovia Padre Manoel da Nóbrega, Nova Itariri, Ana Dias, Itariri, São Paulo, Região Sudeste, Brasil",
+        "reject_reason": "missing_required_location_fields"
+    },
+    {
+        "id": 4974,
+        "lat": -24.3005,
+        "lon": -46.849,
+        "city": "desconhecido",
+        "suburb": "desconhecido",
+        "postcode": "desconhecido",
+        "full_address": "São Paulo, Região Sudeste, Brasil",
+        "reject_reason": "missing_required_location_fields"
+    },
+    {
+        "id": 5025,
+        "lat": -24.2005,
+        "lon": -49.349,
+        "city": "Sengés",
+        "suburb": "desconhecido",
+        "postcode": "desconhecido",
+        "full_address": "Sengés, Paraná, Região Sul, Brasil",
+        "reject_reason": "missing_required_location_fields"
+    },
+    {
+        "id": 5026,
+        "lat": -24.2005,
+        "lon": -49.249,
+        "city": "Itararé",
+        "suburb": "desconhecido",
+        "postcode": "desconhecido",
+        "full_address": "Itararé, São Paulo, Brasil, Região Geográfica Intermediária de Sorocaba",
+        "reject_reason": "missing_required_location_fields"
+    },
+    {
+        "id": 5027,
+        "lat": -24.2005,
+        "lon": -49.149,
+        "city": "Itararé",
+        "suburb": "desconhecido",
+        "postcode": "18460-023",
+        "full_address": "Itararé, São Paulo, Região Sudeste, 18460-023, Brasil",
+        "reject_reason": "missing_required_location_fields"
+    },
+    {
+        "id": 5028,
+        "lat": -24.2005,
+        "lon": -49.049,
+        "city": "Nova Campina",
+        "suburb": "desconhecido",
+        "postcode": "18435-000",
+        "full_address": "Nova Campina, São Paulo, Região Sudeste, 18435-000, Brasil",
+        "reject_reason": "missing_required_location_fields"
+    },
+    {
+        "id": 5030,
+        "lat": -24.2005,
+        "lon": -48.849,
+        "city": "Ribeirão Branco",
+        "suburb": "Caçador Urias/Nunes",
+        "postcode": "desconhecido",
+        "full_address": "Caçador Mangueira Preta, Caçador Urias/Nunes, Ribeirão Branco, São Paulo, Brasil, Região Geográfica Intermediária de Sorocaba",
+        "reject_reason": "missing_required_location_fields"
+    },
+    {
+        "id": 5031,
+        "lat": -24.2005,
+        "lon": -48.749,
+        "city": "Ribeirão Branco",
+        "suburb": "Pires",
+        "postcode": "desconhecido",
+        "full_address": "Pires, Ribeirão Branco, São Paulo, Brasil, Região Geográfica Intermediária de Sorocaba",
+        "reject_reason": "missing_required_location_fields"
+    },
+    {
+        "id": 5032,
+        "lat": -24.2005,
+        "lon": -48.649,
+        "city": "Ribeirão Branco",
+        "suburb": "Cerrado",
+        "postcode": "desconhecido",
+        "full_address": "Fazenda São Miguel, Rodovia José Rodrigues do Espírito Santo, Cerrado, Ribeirão Branco, São Paulo, Brasil, Região Geográfica Intermediária de Sorocaba",
+        "reject_reason": "missing_required_location_fields"
+    },
+    {
+        "id": 5034,
+        "lat": -24.2005,
+        "lon": -48.449,
+        "city": "Guapiara",
+        "suburb": "Brizolas",
+        "postcode": "desconhecido",
+        "full_address": "Brizolas, Guapiara, São Paulo, Brasil, Região Imediata de Itapeva",
+        "reject_reason": "missing_required_location_fields"
+    },
+    {
+        "id": 5036,
+        "lat": -24.2005,
+        "lon": -48.249,
+        "city": "Capão Bonito",
+        "suburb": "desconhecido",
+        "postcode": "desconhecido",
+        "full_address": "Fazenda Capinzal - Dedini, Capão Bonito, São Paulo, Região Sudeste, Brasil",
+        "reject_reason": "missing_required_location_fields"
+    },
+    {
+        "id": 5037,
+        "lat": -24.2005,
+        "lon": -48.149,
+        "city": "Capão Bonito",
+        "suburb": "desconhecido",
+        "postcode": "desconhecido",
+        "full_address": "Capão Bonito, São Paulo, Região Sudeste, Brasil",
+        "reject_reason": "missing_required_location_fields"
+    },
+    {
+        "id": 5038,
+        "lat": -24.2005,
+        "lon": -48.049,
+        "city": "Sete Barras",
+        "suburb": "Saibadela",
+        "postcode": "desconhecido",
+        "full_address": "Saibadela, Sete Barras, São Paulo, Região Sudeste, Brasil",
+        "reject_reason": "missing_required_location_fields"
+    },
+    {
+        "id": 5039,
+        "lat": -24.2005,
+        "lon": -47.949,
+        "city": "Sete Barras",
+        "suburb": "desconhecido",
+        "postcode": "11910-000",
+        "full_address": "Sete Barras, São Paulo, Região Sudeste, 11910-000, Brasil",
+        "reject_reason": "missing_required_location_fields"
+    },
+    {
+        "id": 5040,
+        "lat": -24.2005,
+        "lon": -47.849,
+        "city": "Sete Barras",
+        "suburb": "desconhecido",
+        "postcode": "11910-000",
+        "full_address": "Sete Barras, São Paulo, Região Sudeste, 11910-000, Brasil",
+        "reject_reason": "missing_required_location_fields"
+    },
+    {
+        "id": 5041,
+        "lat": -24.2005,
+        "lon": -47.749,
+        "city": "Juquiá",
+        "suburb": "desconhecido",
+        "postcode": "11800-000",
+        "full_address": "Juquiá, São Paulo, Região Sudeste, 11800-000, Brasil",
+        "reject_reason": "missing_required_location_fields"
+    },
+    {
+        "id": 5042,
+        "lat": -24.2005,
+        "lon": -47.649,
+        "city": "Juquiá",
+        "suburb": "Lajeado",
+        "postcode": "desconhecido",
+        "full_address": "Lajeado, Juquiá, São Paulo, Brasil, Região Geográfica Intermediária de Sorocaba",
+        "reject_reason": "missing_required_location_fields"
+    },
+    {
+        "id": 5043,
+        "lat": -24.2005,
+        "lon": -47.549,
+        "city": "Miracatu",
+        "suburb": "Oliveira Barros",
+        "postcode": "desconhecido",
+        "full_address": "Santa Rita de Cassia, Oliveira Barros, Miracatu, São Paulo, Região Sudeste, Brasil",
+        "reject_reason": "missing_required_location_fields"
+    },
+    {
+        "id": 5044,
+        "lat": -24.2005,
+        "lon": -47.449,
+        "city": "Miracatu",
+        "suburb": "desconhecido",
+        "postcode": "desconhecido",
+        "full_address": "Miracatu, São Paulo, Região Sudeste, Brasil",
+        "reject_reason": "missing_required_location_fields"
+    },
+    {
+        "id": 5045,
+        "lat": -24.2005,
+        "lon": -47.349,
+        "city": "Miracatu",
+        "suburb": "Santa Rita do Ribeira",
+        "postcode": "desconhecido",
+        "full_address": "Santa Rita do Ribeira, Miracatu, São Paulo, Região Sudeste, Brasil",
+        "reject_reason": "missing_required_location_fields"
+    },
+    {
+        "id": 5046,
+        "lat": -24.2005,
+        "lon": -47.249,
+        "city": "Pedro de Toledo",
+        "suburb": "desconhecido",
+        "postcode": "desconhecido",
+        "full_address": "Pedro de Toledo, São Paulo, Região Sudeste, Brasil",
+        "reject_reason": "missing_required_location_fields"
+    },
+    {
+        "id": 5047,
+        "lat": -24.2005,
+        "lon": -47.149,
+        "city": "Pedro de Toledo",
+        "suburb": "desconhecido",
+        "postcode": "desconhecido",
+        "full_address": "Estrada das Três Barras, Pedro de Toledo, São Paulo, Região Sudeste, Brasil",
+        "reject_reason": "missing_required_location_fields"
+    },
+    {
+        "id": 5048,
+        "lat": -24.2005,
+        "lon": -47.049,
+        "city": "Peruíbe",
+        "suburb": "Bambú",
+        "postcode": "desconhecido",
+        "full_address": "Estrada Rio do Ouro, Bambú, Peruíbe, São Paulo, Região Sudeste, Brasil",
+        "reject_reason": "missing_required_location_fields"
+    },
+    {
+        "id": 5049,
+        "lat": -24.2005,
+        "lon": -46.949,
+        "city": "Peruíbe",
+        "suburb": "Bambú",
+        "postcode": "desconhecido",
+        "full_address": "Bambú, Peruíbe, São Paulo, Região Sudeste, Brasil",
+        "reject_reason": "missing_required_location_fields"
+    },
+    {
+        "id": 5050,
+        "lat": -24.2005,
+        "lon": -46.849,
+        "city": "Itanhaém",
+        "suburb": "Cidade Santa Júlia",
+        "postcode": "desconhecido",
+        "full_address": "Rodovia Padre Manoel da Nóbrega, Jardim Grandesp, Cidade Santa Júlia, Itanhaém, São Paulo, Região Sudeste, Brasil",
+        "reject_reason": "missing_required_location_fields"
+    },
+    {
+        "id": 5101,
+        "lat": -24.1005,
+        "lon": -49.449,
+        "city": "Sengés",
+        "suburb": "desconhecido",
+        "postcode": "desconhecido",
+        "full_address": "Sengés, Paraná, Região Sul, Brasil, Região Geográfica Intermediária de Ponta Grossa",
+        "reject_reason": "missing_required_location_fields"
+    }
+]

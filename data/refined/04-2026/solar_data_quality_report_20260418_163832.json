@@ -1,0 +1,10 @@
+{
+    "source_file": "solar_data_trusted_20260418_134314.json",
+    "processed_at": "2026-04-18T16:19:57.771079",
+    "input_records": 190,
+    "geocode_failed": 0,
+    "missing_postcode": 138,
+    "missing_suburb": 123,
+    "saved_records": 11,
+    "retention_rate_pct": 5.79
+}
