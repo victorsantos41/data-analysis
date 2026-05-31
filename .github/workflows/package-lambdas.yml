@@ -1,0 +1,67 @@
+name: Package Lambdas
+
+on:
+  push:
+    branches:
+      - main
+    tags:
+      - "v*"
+  workflow_dispatch:
+
+jobs:
+  build-and-release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt -t ./package
+
+      - name: Package raw_to_trusted
+        run: |
+          cd package
+          zip -r ../raw_to_trusted.zip .
+          cd ..
+          zip -g raw_to_trusted.zip raw_to_trusted.py
+
+      - name: Package trusted_to_refined
+        run: |
+          cd package
+          zip -r ../trusted_to_refined.zip .
+          cd ..
+          zip -g trusted_to_refined.zip trusted_to_refined.py
+
+      - name: Release
+        uses: softprops/action-gh-release@v2
+        if: startsWith(github.ref, 'refs/tags/')
+        with:
+          files: |
+            raw_to_trusted.zip
+            trusted_to_refined.zip
+          draft: false
+          prerelease: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Latest Release (Continuous)
+        uses: marvinpinto/action-automatic-releases@latest
+        if: github.ref == 'refs/heads/main'
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          automatic_release_tag: latest
+          prerelease: true
+          title: "Latest Development Build"
+          files: |
+            raw_to_trusted.zip
+            trusted_to_refined.zip
