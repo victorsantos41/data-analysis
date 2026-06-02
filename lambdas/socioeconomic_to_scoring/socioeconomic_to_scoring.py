@@ -63,10 +63,10 @@ def load_socioeconomic_records_from_s3(bucket, key):
     return payload
 
 
-def build_scoring_key():
+def build_target_key():
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
     date_folder = datetime.now().strftime("%m-%Y")
-    return f"{date_folder}/solar_data_scoring_{timestamp}.json"
+    return f"incoming/{date_folder}/solar_data_scoring_{timestamp}.json"
 
 
 def is_valid_socioeconomic_record(record):
@@ -250,7 +250,7 @@ def lambda_handler(event, context):
             "records": scored_records,
         }
 
-        target_key = build_scoring_key()
+        target_key = build_target_key()
         s3.put_object(
             Bucket=SCORING_BUCKET,
             Key=target_key,

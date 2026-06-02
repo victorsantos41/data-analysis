@@ -37,10 +37,10 @@ def load_trusted_records_from_s3(bucket, key):
 
     return payload
 
-def build_refined_key():
+def build_target_key():
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
     date_folder = datetime.now().strftime("%m-%Y")
-    return f"{date_folder}/solar_data_refined_{timestamp}.json"
+    return f"incoming/{date_folder}/solar_data_refined_{timestamp}.json"
 
 def calculate_seasons(monthly_data):
     return {
@@ -174,7 +174,7 @@ def lambda_handler(event, context):
         valid_records = build_resolved_valid_records(trusted_records, RESOLVER)
         aggregated_records = aggregate_records(valid_records)
 
-        target_key = build_refined_key()
+        target_key = build_target_key()
         s3.put_object(
             Bucket=REFINED_BUCKET,
             Key=target_key,

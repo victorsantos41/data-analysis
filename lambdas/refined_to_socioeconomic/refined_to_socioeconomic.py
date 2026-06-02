@@ -56,10 +56,10 @@ def load_sidra_snapshot(snapshot_path):
     return payload
 
 
-def build_socioeconomic_key():
+def build_target_key():
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
     date_folder = datetime.now().strftime("%m-%Y")
-    return f"{date_folder}/solar_data_socioeconomic_{timestamp}.json"
+    return f"incoming/{date_folder}/solar_data_socioeconomic_{timestamp}.json"
 
 
 def is_aggregated_refined_file(file_name, records):
@@ -179,7 +179,7 @@ def lambda_handler(event, context):
                 }
             )
 
-        target_key = build_socioeconomic_key()
+        target_key = build_target_key()
         s3.put_object(
             Bucket=SOCIOECONOMIC_BUCKET,
             Key=target_key,
