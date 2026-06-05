@@ -33,7 +33,7 @@ jobs:
           cd package
           zip -r ../raw_to_trusted.zip .
           cd ..
-          zip -g raw_to_trusted.zip lambdas/raw_to_trusted.py
+          zip -g raw_to_trusted.zip raw_to_trusted.py
 
       - name: Package trusted_to_refined
         run: |
