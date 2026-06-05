@@ -40,7 +40,7 @@ def load_trusted_records_from_s3(bucket, key):
 def build_target_key():
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
     date_folder = datetime.now().strftime("%m-%Y")
-    return f"incoming/{date_folder}/solar_data_refined_{timestamp}.json"
+    return f"{date_folder}/solar_data_refined_{timestamp}.json"
 
 def calculate_seasons(monthly_data):
     return {

@@ -59,7 +59,7 @@ def load_sidra_snapshot(snapshot_path):
 def build_target_key():
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
     date_folder = datetime.now().strftime("%m-%Y")
-    return f"incoming/{date_folder}/solar_data_socioeconomic_{timestamp}.json"
+    return f"{date_folder}/solar_data_socioeconomic_{timestamp}.json"
 
 
 def is_aggregated_refined_file(file_name, records):
