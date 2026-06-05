@@ -40,25 +40,25 @@ jobs:
           cd package
           zip -r ../trusted_to_refined.zip .
           cd ..
-          zip -g trusted_to_refined.zip lambdas/trusted_to_refined/trusted_to_refined.py
-          zip -g trusted_to_refined.zip lambdas/trusted_to_refined/municipality_resolver.py
-          zip -g trusted_to_refined.zip lambdas/trusted_to_refined/ibge_sp_municipios_geo_fixed.geojson
-          zip -g trusted_to_refined.zip lambdas/trusted_to_refined/ibge_municipios_sp_test.json
+          zip -g trusted_to_refined.zip trusted_to_refined.py
+          zip -g trusted_to_refined.zip municipality_resolver.py
+          zip -g trusted_to_refined.zip ibge_sp_municipios_geo_fixed.geojson
+          zip -g trusted_to_refined.zip ibge_municipios_sp_test.json
 
       - name: Package refined_to_socioeconomic
         run: |
           cd package
           zip -r ../refined_to_socioeconomic.zip .
           cd ..
-          zip -g refined_to_socioeconomic.zip lambdas/refined_to_socioeconomic/refined_to_socioeconomic.py
-          zip -g refined_to_socioeconomic.zip lambdas/refined_to_socioeconomic/sidra_snapshot.json
+          zip -g refined_to_socioeconomic.zip refined_to_socioeconomic.py
+          zip -g refined_to_socioeconomic.zip sidra_snapshot.json
 
       - name: Package socioeconomic_to_scoring
         run: |
           cd package
           zip -r ../socioeconomic_to_scoring.zip .
           cd ..
-          zip -g socioeconomic_to_scoring.zip lambdas/socioeconomic_to_scoring/socioeconomic_to_scoring.py
+          zip -g socioeconomic_to_scoring.zip socioeconomic_to_scoring.py
 
       - name: Release
         uses: softprops/action-gh-release@v2
