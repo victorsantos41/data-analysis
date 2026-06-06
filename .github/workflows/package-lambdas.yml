@@ -60,6 +60,13 @@ jobs:
           cd ..
           zip -g socioeconomic_to_scoring.zip socioeconomic_to_scoring.py
 
+      - name: Package scoring_to_olap
+        run: |
+          cd package
+          zip -r ../scoring_to_olap.zip .
+          cd ..
+          zip -g scoring_to_olap.zip scoring_to_olap.py
+
       - name: Release
         uses: softprops/action-gh-release@v2
         if: startsWith(github.ref, 'refs/tags/')
@@ -69,6 +76,7 @@ jobs:
             trusted_to_refined.zip
             refined_to_socioeconomic.zip
             socioeconomic_to_scoring.zip
+            scoring_to_olap.zip
           draft: false
           prerelease: false
         env:
@@ -87,3 +95,4 @@ jobs:
             trusted_to_refined.zip
             refined_to_socioeconomic.zip
             socioeconomic_to_scoring.zip
+            scoring_to_olap.zip
