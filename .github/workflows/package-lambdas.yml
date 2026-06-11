@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
-    
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -41,6 +41,31 @@ jobs:
           zip -r ../trusted_to_refined.zip .
           cd ..
           zip -g trusted_to_refined.zip trusted_to_refined.py
+          zip -g trusted_to_refined.zip municipality_resolver.py
+          zip -g trusted_to_refined.zip ibge_sp_municipios_geo_fixed.geojson
+          zip -g trusted_to_refined.zip ibge_municipios_sp_test.json
+
+      - name: Package refined_to_socioeconomic
+        run: |
+          cd package
+          zip -r ../refined_to_socioeconomic.zip .
+          cd ..
+          zip -g refined_to_socioeconomic.zip refined_to_socioeconomic.py
+          zip -g refined_to_socioeconomic.zip sidra_snapshot.json
+
+      - name: Package socioeconomic_to_scoring
+        run: |
+          cd package
+          zip -r ../socioeconomic_to_scoring.zip .
+          cd ..
+          zip -g socioeconomic_to_scoring.zip socioeconomic_to_scoring.py
+
+      - name: Package scoring_to_olap
+        run: |
+          cd package
+          zip -r ../scoring_to_olap.zip .
+          cd ..
+          zip -g scoring_to_olap.zip scoring_to_olap.py
 
       - name: Release
         uses: softprops/action-gh-release@v2
@@ -49,6 +74,9 @@ jobs:
           files: |
             raw_to_trusted.zip
             trusted_to_refined.zip
+            refined_to_socioeconomic.zip
+            socioeconomic_to_scoring.zip
+            scoring_to_olap.zip
           draft: false
           prerelease: false
         env:
@@ -65,3 +93,6 @@ jobs:
           files: |
             raw_to_trusted.zip
             trusted_to_refined.zip
+            refined_to_socioeconomic.zip
+            socioeconomic_to_scoring.zip
+            scoring_to_olap.zip

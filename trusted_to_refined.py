@@ -1,126 +1,211 @@
+import boto3
 import json
 import os
-import time
-import urllib.request
 from datetime import datetime
-from dotenv import load_dotenv
+from urllib.parse import unquote_plus
+from municipality_resolver import MunicipalityResolver
 
-load_dotenv()
+s3 = boto3.client("s3")
 
-def reverse_geocode(lat, lon, user_agent):
-    """Solicita informações de endereço para o OpenStreetMap."""
-    base_url = "https://nominatim.openstreetmap.org/reverse?format=json"
-    url = f"{base_url}&lat={lat}&lon={lon}"
-    headers = {'User-Agent': user_agent}
+TRUSTED_BUCKET = os.getenv("TRUSTED_BUCKET", "solarway-trusted")
+REFINED_BUCKET = os.getenv("REFINED_BUCKET", "solarway-refined")
+LAMBDA_ASSETS_DIR = os.getenv("LAMBDA_ASSETS_DIR", os.path.dirname(__file__))
+IBGE_GEOJSON_PATH = os.path.join(
+    LAMBDA_ASSETS_DIR,
+    os.getenv("IBGE_GEOJSON_FILE", "ibge_sp_municipios_geo_fixed.geojson"),
+)
+IBGE_MUNICIPALITIES_PATH = os.path.join(
+    LAMBDA_ASSETS_DIR,
+    os.getenv("IBGE_MUNICIPALITIES_FILE", "ibge_municipios_sp_test.json"),
+)
 
-    try:
-        time.sleep(1.1)  # Respeitar limite de taxa (1 req/sec)
-        req = urllib.request.Request(url, headers=headers)
-        with urllib.request.urlopen(req) as response:
-            if response.getcode() == 200:
-                data = json.loads(response.read().decode('utf-8'))
-                if data and 'display_name' in data:
-                    print(f"[{datetime.now().strftime('%H:%M:%S')}] [Geo] Sucesso: {data['display_name'][:50]}...")
-                return data
-    except Exception as e:
-        print(f"[{datetime.now().strftime('%H:%M:%S')}] [Geo] Erro: {e}")
-        return None
-    return None
+MONTH_KEYS = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"]
+GROUP_KEYS = ["state", "city", "ibge_city_code"]
+RESOLVER = MunicipalityResolver(
+    geojson_path=IBGE_GEOJSON_PATH,
+    municipalities_path=IBGE_MUNICIPALITIES_PATH,
+    cache_path="/tmp/municipality_lookup_sp.json",
+)
+
+def load_trusted_records_from_s3(bucket, key):
+    response = s3.get_object(Bucket=bucket, Key=key)
+    content = response["Body"].read().decode("utf-8")
+    payload = json.loads(content)
+
+    if not isinstance(payload, list):
+        raise ValueError("Arquivo trusted invalido: esperado JSON array.")
+
+    return payload
+
+def build_target_key():
+    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+    date_folder = datetime.now().strftime("%m-%Y")
+    return f"{date_folder}/solar_data_refined_{timestamp}.json"
 
 def calculate_seasons(monthly_data):
-    """Calcula as médias sazonais e arredonda para 1 casa decimal."""
     return {
-        "summer": round((monthly_data.get("JAN", 0) + monthly_data.get("FEB", 0) + monthly_data.get("DEC", 0)) / 3, 1),
-        "autumn": round((monthly_data.get("MAR", 0) + monthly_data.get("APR", 0) + monthly_data.get("MAY", 0)) / 3, 1),
-        "winter": round((monthly_data.get("JUN", 0) + monthly_data.get("JUL", 0) + monthly_data.get("AUG", 0)) / 3, 1),
-        "spring": round((monthly_data.get("SEP", 0) + monthly_data.get("OCT", 0) + monthly_data.get("NOV", 0)) / 3, 1)
+        "summer_avg": round((monthly_data.get("JAN", 0) + monthly_data.get("FEB", 0) + monthly_data.get("DEC", 0)) / 3, 1),
+        "autumn_avg": round((monthly_data.get("MAR", 0) + monthly_data.get("APR", 0) + monthly_data.get("MAY", 0)) / 3, 1),
+        "winter_avg": round((monthly_data.get("JUN", 0) + monthly_data.get("JUL", 0) + monthly_data.get("AUG", 0)) / 3, 1),
+        "spring_avg": round((monthly_data.get("SEP", 0) + monthly_data.get("OCT", 0) + monthly_data.get("NOV", 0)) / 3, 1),
     }
 
-def process_trusted_to_refined():
-    trusted_path = os.getenv("TRUSTED_DATA_PATH", "data/trusted")
-    refined_path = os.getenv("REFINED_DATA_PATH", "data/refined")
-    user_agent = os.getenv("NOMINATIM_USER_AGENT", "SolarIrradiationPipeline/1.0")
+def aggregate_records(valid_records):
+    if not valid_records:
+        return []
 
-    if not os.path.exists(refined_path):
-        os.makedirs(refined_path)
+    grouped = {}
 
-    # Listar arquivos JSON pendentes na Trusted
-    for root, dirs, files in os.walk(trusted_path):
-        processed_log = os.path.join(root, ".processed")
-        processed_files = set()
-        if os.path.exists(processed_log):
-            with open(processed_log, 'r') as f:
-                processed_files = {line.strip() for line in f}
+    for record in valid_records:
+        missing_group_field = any(record.get(field) in (None, "") for field in GROUP_KEYS)
+        if missing_group_field:
+            continue
 
-        json_files = [f for f in files if f.startswith("solar_data_trusted_") and f.endswith(".json") and f not in processed_files]
+        group_key = tuple(record[field] for field in GROUP_KEYS)
+        group = grouped.setdefault(
+            group_key,
+            {
+                "state": record["state"],
+                "city": record["city"],
+                "ibge_city_code": record["ibge_city_code"],
+                "ibge_city_name": record.get("ibge_city_name"),
+                "ibge_state_name": record.get("ibge_state_name"),
+                "ibge_state_acronym": record.get("ibge_state_acronym"),
+                "points_count": 0,
+                "lat_sum": 0.0,
+                "lon_sum": 0.0,
+                "annual_sum": 0.0,
+                "month_sums": {month.lower() + "_avg": 0.0 for month in MONTH_KEYS},
+                "season_sums": {
+                    "summer_avg": 0.0,
+                    "autumn_avg": 0.0,
+                    "winter_avg": 0.0,
+                    "spring_avg": 0.0,
+                },
+            },
+        )
 
-        for file_name in json_files:
-            file_path = os.path.join(root, file_name)
-            print(f"[{datetime.now().strftime('%H:%M:%S')}] Refinando: {file_name}")
+        group["points_count"] += 1
+        group["lat_sum"] += float(record["lat"])
+        group["lon_sum"] += float(record["lon"])
+        group["annual_sum"] += float(record["annual"])
 
-            try:
-                with open(file_path, 'r', encoding='utf-8') as f:
-                    readings = json.load(f)
+        for month in MONTH_KEYS:
+            group["month_sums"][month.lower() + "_avg"] += float(record.get(month, 0.0))
 
-                enriched_list = []
-                for r in readings:
-                    # Geocodificação Reversa
-                    geo_data = reverse_geocode(r['lat'], r['lon'], user_agent)
-                    
-                    if not geo_data:
-                        continue
+        for season_key in group["season_sums"]:
+            group["season_sums"][season_key] += float(record.get(season_key, 0.0))
 
-                    addr = geo_data.get('address', {})
-                    
-                    # Extração de campos (Idioma Inglês)
-                    city = addr.get('city') or addr.get('city_district') or addr.get('town') or addr.get('village') or addr.get('municipality')
-                    suburb = addr.get('suburb') or addr.get('neighbourhood') or addr.get('hamlet')
-                    postcode = addr.get('postcode')
-                    
-                    # Regras de Negócio: CEP e Bairro obrigatórios
-                    if not postcode or not suburb:
-                        print(f"[{datetime.now().strftime('%H:%M:%S')}] Pulando ID {r['id']}: CEP ou Bairro não encontrados.")
-                        continue
+    aggregated_records = []
+    for group in grouped.values():
+        points_count = group["points_count"]
+        aggregated_records.append(
+            {
+                "state": group["state"],
+                "city": group["city"],
+                "ibge_city_code": group["ibge_city_code"],
+                "ibge_city_name": group["ibge_city_name"],
+                "ibge_state_name": group["ibge_state_name"],
+                "ibge_state_acronym": group["ibge_state_acronym"],
+                "points_count": points_count,
+                "avg_lat": round(group["lat_sum"] / points_count, 1),
+                "avg_lon": round(group["lon_sum"] / points_count, 1),
+                "annual_avg": round(group["annual_sum"] / points_count, 1),
+                **{
+                    month_key: round(total / points_count, 1)
+                    for month_key, total in group["month_sums"].items()
+                },
+                **{
+                    season_key: round(total / points_count, 1)
+                    for season_key, total in group["season_sums"].items()
+                },
+            }
+        )
 
-                    # Cálculo de médias sazonais (Arredondadas)
-                    seasons = calculate_seasons(r['monthly_data'])
+    return aggregated_records
 
-                    enriched = {
-                        "id": r['id'],
-                        "lat": r['lat'],
-                        "lon": r['lon'],
-                        "state": r.get('state') or r.get('uf'),
-                        "city": city,
-                        "suburb": suburb,
-                        "road": addr.get('road') or addr.get('street') or addr.get('pedestrian'),
-                        "postcode": postcode,
-                        "full_address": geo_data.get('display_name'),
-                        "annual": round(r['annual'], 1),
-                        **{m: round(v, 1) for m, v in r['monthly_data'].items()},
-                        **{f"{k}_avg": v for k, v in seasons.items()}
-                    }
-                    enriched_list.append(enriched)
+def build_resolved_valid_records(trusted_records, resolver):
+    valid_records = []
 
-                if enriched_list:
-                    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-                    date_folder = os.path.basename(root)  # Usa MM-YYYY da pasta de origem
-                    target_dir = os.path.join(refined_path, date_folder)
-                    
-                    if not os.path.exists(target_dir):
-                        os.makedirs(target_dir)
+    for reading in trusted_records:
+        monthly_data = reading.get("monthly_data", {})
+        seasons = calculate_seasons(monthly_data)
 
-                    target_file = os.path.join(target_dir, f"solar_data_refined_{timestamp}.json")
-                    with open(target_file, 'w', encoding='utf-8') as f:
-                        json.dump(enriched_list, f, indent=4, ensure_ascii=False)
+        location = resolver.resolve(reading["lat"], reading["lon"])
+        if not location.get("matched"):
+            continue
 
-                    # Marcar como processado
-                    with open(processed_log, 'a') as f:
-                        f.write(f"{file_name}\n")
-                    
-                    print(f"[{datetime.now().strftime('%H:%M:%S')}] Salvo em: {target_file}")
+        valid_records.append(
+            {
+                "id": reading["id"],
+                "lat": float(reading["lat"]),
+                "lon": float(reading["lon"]),
+                "state": location.get("state") or reading.get("state"),
+                "city": location.get("city"),
+                "ibge_city_code": location.get("ibge_city_code"),
+                "ibge_city_name": location.get("ibge_city_name"),
+                "ibge_state_name": location.get("ibge_state_name"),
+                "ibge_state_acronym": location.get("ibge_state_acronym"),
+                "annual": round(float(reading["annual"]), 1),
+                **{month: round(float(monthly_data.get(month, 0)), 1) for month in MONTH_KEYS},
+                **seasons,
+            }
+        )
 
-            except Exception as e:
-                print(f"Erro ao refinar {file_name}: {e}")
+    return valid_records
 
-if __name__ == "__main__":
-    process_trusted_to_refined()
+def lambda_handler(event, context):
+    processed_files = []
+
+    for record in event.get("Records", []):
+        source_bucket = record["s3"]["bucket"]["name"]
+        source_key = unquote_plus(record["s3"]["object"]["key"])
+
+        if source_bucket != TRUSTED_BUCKET:
+            print(f"Ignorando bucket nao esperado: {source_bucket}")
+            continue
+
+        if not source_key.lower().endswith(".json"):
+            print(f"Ignorando arquivo nao JSON: {source_key}")
+            continue
+
+        print(f"[{datetime.now().strftime('%H:%M:%S')}] Processando: {source_key}")
+        trusted_records = load_trusted_records_from_s3(source_bucket, source_key)
+        valid_records = build_resolved_valid_records(trusted_records, RESOLVER)
+        aggregated_records = aggregate_records(valid_records)
+
+        target_key = build_target_key()
+        s3.put_object(
+            Bucket=REFINED_BUCKET,
+            Key=target_key,
+            Body=json.dumps(aggregated_records, ensure_ascii=False).encode("utf-8"),
+            ContentType="application/json",
+        )
+
+        print(f"[{datetime.now().strftime('%H:%M:%S')}] Registros lidos: {len(trusted_records)}")
+        print(f"[{datetime.now().strftime('%H:%M:%S')}] Registros preparados: {len(valid_records)}")
+        print(f"[{datetime.now().strftime('%H:%M:%S')}] Registros agregados: {len(aggregated_records)}")
+        print(f"[{datetime.now().strftime('%H:%M:%S')}] Salvo em: s3://{REFINED_BUCKET}/{target_key}")
+
+        processed_files.append(
+            {
+                "source_bucket": source_bucket,
+                "source_key": source_key,
+                "target_bucket": REFINED_BUCKET,
+                "target_key": target_key,
+                "records_read": len(trusted_records),
+                "records_prepared": len(valid_records),
+                "records_aggregated": len(aggregated_records),
+            }
+        )
+
+    return {
+        "statusCode": 200,
+        "body": json.dumps(
+            {
+                "message": "trusted_to_refined base lambda concluido",
+                "processed_files": processed_files,
+            },
+            ensure_ascii=False,
+        ),
+    }
