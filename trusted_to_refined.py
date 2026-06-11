@@ -7,8 +7,8 @@ from municipality_resolver import MunicipalityResolver
 
 s3 = boto3.client("s3")
 
-TRUSTED_BUCKET = os.getenv("TRUSTED_BUCKET", "solarway-trusted")
-REFINED_BUCKET = os.getenv("REFINED_BUCKET", "solarway-refined")
+TRUSTED_BUCKET = os.getenv("TRUSTED_BUCKET", "solarway-trusted-victor-santos")
+REFINED_BUCKET = os.getenv("REFINED_BUCKET", "solarway-refined-victor-santos")
 LAMBDA_ASSETS_DIR = os.getenv("LAMBDA_ASSETS_DIR", os.path.dirname(__file__))
 IBGE_GEOJSON_PATH = os.path.join(
     LAMBDA_ASSETS_DIR,

@@ -7,8 +7,8 @@ from urllib.parse import unquote_plus
 
 s3 = boto3.client("s3")
 
-SOCIOECONOMIC_BUCKET = os.getenv("SOCIOECONOMIC_BUCKET", "solarway-socioeconomic")
-SCORING_BUCKET = os.getenv("SCORING_BUCKET", "solarway-scoring")
+SOCIOECONOMIC_BUCKET = os.getenv("SOCIOECONOMIC_BUCKET", "solarway-socioeconomic-victor-santos")
+SCORING_BUCKET = os.getenv("SCORING_BUCKET", "solarway-scoring-victor-santos")
 UNKNOWN_TEXT = "desconhecido"
 
 SCORE_WEIGHTS = {

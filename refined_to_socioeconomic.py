@@ -7,8 +7,8 @@ from urllib.parse import unquote_plus
 
 s3 = boto3.client("s3")
 
-REFINED_BUCKET = os.getenv("REFINED_BUCKET", "solarway-refined")
-SOCIOECONOMIC_BUCKET = os.getenv("SOCIOECONOMIC_BUCKET", "solarway-socioeconomic")
+REFINED_BUCKET = os.getenv("REFINED_BUCKET", "solarway-refined-victor-santos")
+SOCIOECONOMIC_BUCKET = os.getenv("SOCIOECONOMIC_BUCKET", "solarway-socioeconomic-victor-santos")
 LAMBDA_ASSETS_DIR = os.getenv("LAMBDA_ASSETS_DIR", os.path.dirname(__file__))
 SIDRA_SNAPSHOT_PATH = os.path.join(
     LAMBDA_ASSETS_DIR,

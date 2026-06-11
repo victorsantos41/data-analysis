@@ -7,8 +7,8 @@ from io import StringIO
 
 s3 = boto3.client("s3")
 
-RAW_BUCKET = os.getenv("RAW_BUCKET", "solarway-raw")
-TRUSTED_BUCKET = os.getenv("TRUSTED_BUCKET", "solarway-trusted")
+RAW_BUCKET = os.getenv("RAW_BUCKET", "solarway-raw-victor-santos")
+TRUSTED_BUCKET = os.getenv("TRUSTED_BUCKET", "solarway-trusted-victor-santos")
 
 MONTH_KEYS = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"]
 

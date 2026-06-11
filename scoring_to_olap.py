@@ -7,7 +7,7 @@ import pymysql
 
 s3 = boto3.client("s3")
 
-SCORING_BUCKET = os.getenv("SCORING_BUCKET", "solarway-scoring")
+SCORING_BUCKET = os.getenv("SCORING_BUCKET", "solarway-scoring-victor-santos")
 DB_HOST = os.getenv("DB_HOST")
 DB_PORT = int(os.getenv("DB_PORT", "3306"))
 DB_NAME = os.getenv("DB_NAME")
